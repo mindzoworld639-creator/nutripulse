@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+   <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta name="google-adsense-account" content="ca-pub-5205983068075084">
@@ -102,11 +102,21 @@
     <p class="subtitle">AI-Powered Meal & Fitness companion</p>
     
     <div class="form-group">
-        <label for="mealInput">Log Your Meal or Food Item:</label>
-        <input type="text" id="mealInput" placeholder="e.g. 2 Roti, Dal, and Paneer Curry">
+        <label for="categorySelect">Select Tracking Type:</label>
+        <select id="categorySelect">
+            <option value="breakfast">🍳 Breakfast</option>
+            <option value="lunch">🥗 Lunch</option>
+            <option value="dinner">🍲 Dinner</option>
+            <option value="exercise">🏋️ Exercises / Workout</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="mealInput">Log Details:</label>
+        <input type="text" id="mealInput" placeholder="e.g. Oats with milk OR 30 mins running">
     </div>
     
-    <button onclick="analyzeMeal()">Analyze Nutrition</button>
+    <button onclick="analyzeMeal()">Analyze & Track</button>
     
     <div class="result-card" id="resultCard">
         <h3 style="color: #38bdf8; margin-bottom: 8px;">Estimated Breakdown</h3>
@@ -116,28 +126,37 @@
 
 <script>
     function analyzeMeal() {
+        const category = document.getElementById('categorySelect').value;
         const input = document.getElementById('mealInput').value;
         const resultCard = document.getElementById('resultCard');
         const resultText = document.getElementById('resultText');
         
         if(!input.trim()) {
-            alert('Please enter a meal to analyze.');
+            alert('Please enter details to analyze.');
             return;
         }
         
-        resultText.innerHTML = '<strong>Analyzing...</strong> Calculating macros and calorie estimates for "' + input + '"...';
+        resultText.innerHTML = '<strong>Analyzing...</strong> Calculating details for "' + input + '"...';
         resultCard.style.display = 'block';
         
         setTimeout(() => {
-            resultText.innerHTML = '<strong>Meal:</strong> ' + input + '<br><br>' +
-                '🔥 <strong>Calories:</strong> ~450 - 520 kcal<br>' +
-                '💪 <strong>Protein:</strong> 18g<br>' +
-                '🌾 <strong>Carbs:</strong> 62g<br>' +
-                '🥑 <strong>Fats:</strong> 14g<br><br>' +
-                '<em>Tip: Pair with a side salad to improve fiber intake!</em>';
+            if(category === 'exercise') {
+                resultText.innerHTML = '<strong>Activity:</strong> ' + input + '<br><br>' +
+                    '🔥 <strong>Calories Burned:</strong> ~220 - 300 kcal<br>' +
+                    '⏱️ <strong>Estimated Duration:</strong> 30 mins<br><br>' +
+                    '<em>Great job! Stay hydrated after your workout.</em>';
+            } else {
+                resultText.innerHTML = '<strong>' + category.toUpperCase() + ':</strong> ' + input + '<br><br>' +
+                    '🔥 <strong>Calories:</strong> ~450 - 520 kcal<br>' +
+                    '💪 <strong>Protein:</strong> 18g<br>' +
+                    '🌾 <strong>Carbs:</strong> 62g<br>' +
+                    '🥑 <strong>Fats:</strong> 14g<br><br>' +
+                    '<em>Tip: Pair with water to keep digestion smooth!</em>';
+            }
         }, 1200);
     }
 </script>
 
 </body>
 </html>
+         
