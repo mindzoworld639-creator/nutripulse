@@ -78,6 +78,10 @@
         .log-list { list-style: none; max-height: 180px; overflow-y: auto; margin-top: 10px; }
         .log-item { background: #0f172a; padding: 10px; border-radius: 8px; margin-bottom: 8px; font-size: 0.85rem; border-left: 3px solid #38bdf8; display: flex; justify-content: space-between; align-items: center; }
 
+        /* Guide & FAQ styling */
+        .guide-section h4 { color: #38bdf8; margin-top: 12px; font-size: 0.95rem; }
+        .guide-section p { font-size: 0.85rem; color: #cbd5e1; line-height: 1.5; margin-top: 4px; }
+
         footer { margin-top: 30px; font-size: 0.8rem; color: #64748b; text-align: center; }
         footer a { color: #38bdf8; text-decoration: none; margin: 0 8px; }
         
@@ -173,6 +177,20 @@
         <h3>📋 Today's Activity Log</h3>
         <ul class="log-list" id="logList"></ul>
         <button class="btn btn-danger" onclick="clearLogs()">Clear Today's Logs</button>
+    </div>
+
+    <!-- User Guide & AdSense Crawl Text Card -->
+    <div class="card guide-section">
+        <h3>📖 How NutriPulse Pro Works</h3>
+        
+        <h4>Understanding Your Daily Macros</h4>
+        <p>NutriPulse Pro calculates macronutrients (Protein, Carbohydrates, and Fats) based on standard energetic density values. Protein and Carbs supply ~4 calories per gram, while Fats yield ~9 calories per gram. Tracking these ensures a balanced nutritional distribution suited to your fitness goals.</p>
+        
+        <h4>TDEE & Goal Customization</h4>
+        <p>Your Total Daily Energy Expenditure (TDEE) represents the total calories burned in a 24-hour period. Choosing 'Fat Loss' sets a deficit target below TDEE, whereas 'Muscle Gain' allocates a slight caloric surplus supported by elevated protein intake.</p>
+        
+        <h4>Private & Browser-Based Tracking</h4>
+        <p>NutriPulse Pro values user privacy. All activity logs, custom macro balances, and daily water tracking stats are stored locally in your web browser, ensuring fast loading speeds and privacy with zero cloud server requirements.</p>
     </div>
 </div>
 
@@ -301,4 +319,9 @@
 
 </body>
 </html>
-            
+                            
+
+    
+    
+
+    
