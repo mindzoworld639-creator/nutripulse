@@ -235,6 +235,74 @@
       font-size: 1.1rem;
       margin-left: 8px;
     }
+
+    /* Footer & Modal Styling */
+    footer {
+      text-align: center;
+      padding: 20px 0 30px;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border-color);
+      margin-top: 20px;
+    }
+
+    footer a {
+      color: #38bdf8;
+      text-decoration: none;
+      margin: 0 8px;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      padding: 16px;
+    }
+
+    .modal-content {
+      background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+      max-width: 500px;
+      max-height: 80vh;
+      overflow-y: auto;
+      font-size: 0.88rem;
+      line-height: 1.6;
+    }
+
+    .modal-content h3 {
+      color: #38bdf8;
+      margin-bottom: 12px;
+    }
+
+    .modal-content p {
+      margin-bottom: 10px;
+      color: var(--text-muted);
+    }
+
+    .close-modal-btn {
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 12px;
+      width: 100%;
+    }
   </style>
 </head>
 <body>
@@ -366,7 +434,6 @@
     </div>
     <button onclick="logCustomEntry()" class="btn-primary">Add Entry</button>
 
-    <!-- Itemized Entry List -->
     <ul class="log-list" id="logList"></ul>
   </div>
 
@@ -412,6 +479,42 @@
     <div class="guide-box" id="exerciseDisplay">
       <p><strong>🔥 Core & Belly Tone Focus:</strong></p>
       <p style="color: var(--text-muted); margin-top: 4px;">Note: Spot reduction is a myth—overall body fat loss comes from your calorie deficit! Strengthen your core with: 1. Plank Holds (3x45s) 2. Bicycle Crunches (3x20) 3. Lying Leg Raises (3x15).</p>
+    </div>
+  </div>
+
+  <!-- 9. About Us & Footer Section (Required by Google AdSense) -->
+  <div class="card">
+    <h3>ℹ️ About NutriPulse Pro</h3>
+    <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.5;">
+      NutriPulse Pro is a fast, free, and privacy-first fitness companion designed to help users globally calculate TDEE, track macros, follow intermittent fasting schedules, and build daily healthy habits without requiring account registration or server data collection.
+    </p>
+  </div>
+
+  <footer>
+    <p>© 2026 NutriPulse Pro. All rights reserved.</p>
+    <p style="margin-top: 8px;">
+      <a href="javascript:void(0)" onclick="openModal('privacyModal')">Privacy Policy</a> | 
+      <a href="javascript:void(0)" onclick="openModal('termsModal')">Terms of Service</a>
+    </p>
+  </footer>
+
+  <!-- Modal Popups for Policy Pages -->
+  <div id="privacyModal" class="modal-overlay">
+    <div class="modal-content">
+      <h3>Privacy Policy</h3>
+      <p><strong>Last Updated: 2026</strong></p>
+      <p>NutriPulse Pro respects your personal privacy. We do not require account logins or collect personal data on external servers. All information entered (calories, macros, fasting times, and habits) is stored locally inside your browser using HTML5 LocalStorage.</p>
+      <p><strong>Third-Party Services:</strong> We use Google AdSense to serve non-personalized and contextual advertisements. Third-party vendors, including Google, use cookies to serve ads based on prior web activity. Users may opt out of personalized advertising by visiting Google Ad Settings.</p>
+      <button class="close-modal-btn" onclick="closeModal('privacyModal')">Close</button>
+    </div>
+  </div>
+
+  <div id="termsModal" class="modal-overlay">
+    <div class="modal-content">
+      <h3>Terms of Service</h3>
+      <p>NutriPulse Pro provides fitness calculations, nutrition guides, and habit tracking for general informational purposes only. The information provided does not constitute professional medical advice.</p>
+      <p>By using NutriPulse Pro, you agree that you are utilizing the app at your own risk and discretion.</p>
+      <button class="close-modal-btn" onclick="closeModal('termsModal')">Close</button>
     </div>
   </div>
 
@@ -712,6 +815,15 @@
       const text = `📊 NutriPulse Pro Daily Report:\n• Calories: ${state.logged.calories} / ${state.targets.calories} kcal\n• Protein: ${state.logged.protein}g / ${state.targets.protein}g\n• Water: ${state.logged.water} / 2500 ml\nTracked privately with NutriPulse Pro!`;
       navigator.clipboard.writeText(text);
       alert("Daily summary copied to clipboard!");
+    }
+
+    // Modal Helpers
+    function openModal(id) {
+      document.getElementById(id).style.display = 'flex';
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).style.display = 'none';
     }
 
     // Startup Initialization
