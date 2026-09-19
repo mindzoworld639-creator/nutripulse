@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NutriPulse Pro | Complete Calorie Counter, Macro Database & Fitness Suite</title>
+  <title>NutriPulse Pro | Premium Calorie Counter & Fitness Suite</title>
 
   <!-- SEO Meta Tags -->
-  <meta name="description" content="NutriPulse Pro is a 100% free, privacy-first fitness web app. Search any food with automatic macro breakdown, track calories & macros, log water intake, manage 16:8 intermittent fasting, and access targeted workouts.">
+  <meta name="description" content="NutriPulse Pro is a 100% free, premium fitness web app. Search any food with instant macro breakdown, track calories & macros, log water intake, manage 16:8 intermittent fasting, and access targeted workouts.">
   <meta name="keywords" content="NutriPulse, calorie counter, macro tracker, food nutrition database, portion sizes, water tracker, fasting timer, recipes, workout guide, free fitness app">
   <meta name="robots" content="index, follow">
 
@@ -17,8 +17,8 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
 
   <!-- Open Graph / Social Sharing -->
-  <meta property="og:title" content="NutriPulse Pro - Free & Private Fitness Suite">
-  <meta property="og:description" content="Track your calories, macros, water intake, and fasting progress locally in your browser. Complete automated food nutrition search. No sign-ups required.">
+  <meta property="og:title" content="NutriPulse Pro - Premium Fitness Suite">
+  <meta property="og:description" content="Track your calories, macros, water intake, and fasting progress locally in your browser with a gorgeous, high-end interface.">
   <meta property="og:type" content="website">
 
   <!-- Structured Data (JSON-LD) -->
@@ -34,103 +34,111 @@
       "price": "0",
       "priceCurrency": "USD"
     },
-    "description": "A privacy-focused, zero-login calorie counter, instant food nutrition lookup with complete macro and vitamin breakdown."
+    "description": "A privacy-focused, zero-login premium calorie counter and instant food nutrition lookup."
   }
   </script>
 
   <style>
     :root {
-      --bg-color: #0f172a;
-      --card-bg: #1e293b;
+      --bg-gradient: linear-gradient(135deg, #090d16 0%, #0f172a 50%, #1e1b4b 100%);
+      --card-bg: rgba(30, 41, 59, 0.7);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --accent-grad: linear-gradient(135deg, #10b981 0%, #059669 100%);
       --accent: #10b981;
       --accent-hover: #059669;
       --water-color: #3b82f6;
-      --warning-color: #f59e0b;
-      --danger-color: #ef4444;
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
-      --border-color: #334155;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; }
-    body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.5; padding-bottom: 60px; }
-    header { background-color: var(--card-bg); border-bottom: 1px solid var(--border-color); padding: 1rem 2rem; text-align: center; }
-    header h1 { color: var(--accent); font-size: 1.8rem; font-weight: 700; }
-    header p { color: var(--text-muted); font-size: 0.9rem; margin-top: 0.2rem; }
+    body { background: var(--bg-gradient); color: var(--text-main); min-height: 100vh; line-height: 1.6; padding-bottom: 80px; }
 
-    nav { display: flex; justify-content: center; gap: 0.4rem; background: var(--card-bg); padding: 0.5rem; border-bottom: 1px solid var(--border-color); flex-wrap: wrap; }
-    nav button { background: transparent; border: none; color: var(--text-muted); padding: 0.5rem 0.8rem; font-weight: 600; cursor: pointer; border-radius: 6px; transition: all 0.2s ease; font-size: 0.85rem; }
-    nav button.active, nav button:hover { background: var(--accent); color: white; }
+    header { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(12px); border-bottom: 1px solid var(--card-border); padding: 1.2rem; text-align: center; position: sticky; top: 0; z-index: 100; }
+    header h1 { background: linear-gradient(135deg, #34d399, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.7rem; font-weight: 800; letter-spacing: -0.5px; }
+    header p { color: var(--text-muted); font-size: 0.82rem; margin-top: 0.1rem; }
 
-    main { max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
-    .tab-content { display: none; }
+    nav { display: flex; justify-content: center; gap: 0.3rem; background: rgba(15, 23, 42, 0.9); padding: 0.6rem; border-bottom: 1px solid var(--card-border); overflow-x: auto; white-space: nowrap; }
+    nav::-webkit-scrollbar { display: none; }
+    nav button { background: transparent; border: none; color: var(--text-muted); padding: 0.5rem 0.9rem; font-weight: 600; cursor: pointer; border-radius: 8px; transition: all 0.25s ease; font-size: 0.8rem; }
+    nav button.active, nav button:hover { background: rgba(16, 185, 129, 0.15); color: var(--accent); border: 1px solid rgba(16, 185, 129, 0.3); }
+
+    main { max-width: 800px; margin: 1.5rem auto; padding: 0 1rem; }
+    .tab-content { display: none; animation: fadeIn 0.3s ease; }
     .tab-content.active { display: block; }
 
-    .card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
-    .card h2 { color: var(--accent); font-size: 1.3rem; margin-bottom: 1rem; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+    .card { background: var(--card-bg); backdrop-filter: blur(16px); border: 1px solid var(--card-border); border-radius: 16px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); }
+    .card h2 { color: var(--text-main); font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
 
     .form-group { margin-bottom: 1rem; }
-    .form-group label { display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.3rem; }
-    .form-group input, .form-group select { width: 100%; padding: 0.6rem; background: #0f172a; border: 1px solid var(--border-color); color: white; border-radius: 6px; outline: none; }
+    .form-group label { display: block; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.3rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+    .form-group input, .form-group select { width: 100%; padding: 0.7rem; background: rgba(15, 23, 42, 0.6); border: 1px solid var(--card-border); color: white; border-radius: 10px; outline: none; transition: border 0.2s; font-size: 0.95rem; }
+    .form-group input:focus, .form-group select:focus { border-color: var(--accent); }
 
-    .btn { background: var(--accent); color: white; border: none; padding: 0.7rem 1.2rem; font-weight: 600; border-radius: 6px; cursor: pointer; width: 100%; transition: background 0.2s ease; }
-    .btn:hover { background: var(--accent-hover); }
+    .btn { background: var(--accent-grad); color: white; border: none; padding: 0.8rem 1.2rem; font-weight: 600; border-radius: 10px; cursor: pointer; width: 100%; transition: transform 0.1s ease, box-shadow 0.2s ease; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); font-size: 0.95rem; }
+    .btn:active { transform: scale(0.98); }
 
-    .result-box { background: #0f172a; padding: 1rem; border-radius: 8px; margin-top: 1rem; text-align: center; border: 1px solid var(--border-color); }
-    .result-box h3 { color: var(--accent); font-size: 1.5rem; }
+    .result-box { background: rgba(15, 23, 42, 0.6); padding: 1.2rem; border-radius: 12px; margin-top: 1rem; text-align: center; border: 1px solid var(--card-border); }
+    .result-box h3 { color: var(--accent); font-size: 1.6rem; font-weight: 800; }
 
     /* Nutrition Breakdown Display */
-    .nutri-card { background: #0f172a; border: 1px solid var(--border-color); border-radius: 10px; padding: 1rem; margin-top: 1rem; }
-    .nutri-badge { display: inline-block; padding: 0.3rem 0.6rem; border-radius: 4px; font-weight: 700; font-size: 0.8rem; margin-bottom: 0.8rem; }
-    .badge-good { background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid #10b981; }
+    .nutri-card { background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 1.2rem; margin-top: 1rem; }
+    .nutri-badge { display: inline-block; padding: 0.25rem 0.6rem; border-radius: 6px; font-weight: 700; font-size: 0.75rem; margin-bottom: 0.6rem; background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
 
     .nutri-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin: 0.8rem 0; text-align: center; }
-    .nutri-item { background: var(--card-bg); padding: 0.5rem; border-radius: 6px; border: 1px solid var(--border-color); }
-    .nutri-item span { font-size: 0.7rem; color: var(--text-muted); display: block; }
-    .nutri-item strong { font-size: 0.95rem; color: white; }
+    .nutri-item { background: rgba(30, 41, 59, 0.5); padding: 0.6rem 0.3rem; border-radius: 8px; border: 1px solid var(--card-border); }
+    .nutri-item span { font-size: 0.65rem; color: var(--text-muted); display: block; text-transform: uppercase; }
+    .nutri-item strong { font-size: 0.9rem; color: white; }
+
+    /* Progress Bar */
+    .progress-container { background: rgba(15, 23, 42, 0.6); border-radius: 8px; height: 10px; width: 100%; overflow: hidden; margin-top: 0.8rem; border: 1px solid var(--card-border); }
+    .progress-bar { background: var(--accent-grad); height: 100%; width: 0%; transition: width 0.4s ease; }
 
     /* Fasting Timer */
-    .timer-display { font-size: 3rem; font-weight: 700; text-align: center; margin: 1.5rem 0; color: var(--accent); }
+    .timer-display { font-size: 3rem; font-weight: 800; text-align: center; margin: 1.5rem 0; color: var(--accent); text-shadow: 0 0 20px rgba(16, 185, 129, 0.2); }
     .timer-controls { display: flex; gap: 1rem; }
 
     /* Water Tracker Styles */
-    .water-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.8rem; margin: 1rem 0; }
-    .glass-btn { background: #0f172a; border: 2px solid var(--water-color); color: var(--water-color); padding: 0.8rem 0.5rem; border-radius: 8px; font-weight: 700; cursor: pointer; text-align: center; transition: all 0.2s ease; }
-    .glass-btn.filled { background: var(--water-color); color: white; }
+    .water-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem; margin: 1rem 0; }
+    .glass-btn { background: rgba(15, 23, 42, 0.6); border: 2px solid var(--water-color); color: var(--water-color); padding: 0.8rem 0.4rem; border-radius: 10px; font-weight: 700; cursor: pointer; text-align: center; transition: all 0.2s ease; font-size: 0.85rem; }
+    .glass-btn.filled { background: var(--water-color); color: white; box-shadow: 0 0 15px rgba(59, 130, 246, 0.4); }
 
     /* Loggers & Lists */
     ul { list-style: none; }
-    li { background: #0f172a; padding: 0.75rem 1rem; border-radius: 6px; margin-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border-color); }
-    .delete-btn { background: #ef4444; color: white; border: none; padding: 0.2rem 0.5rem; border-radius: 4px; cursor: pointer; }
+    li { background: rgba(15, 23, 42, 0.5); padding: 0.8rem 1rem; border-radius: 10px; margin-bottom: 0.6rem; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--card-border); }
+    .delete-btn { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); padding: 0.3rem 0.6rem; border-radius: 6px; cursor: pointer; font-size: 0.8rem; transition: background 0.2s; }
+    .delete-btn:hover { background: rgba(239, 68, 68, 0.4); }
 
-    .macro-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-bottom: 1rem; }
-    .macro-card { background: #0f172a; border: 1px solid var(--border-color); padding: 0.6rem; border-radius: 8px; text-align: center; }
-    .macro-card span { font-size: 0.75rem; color: var(--text-muted); display: block; }
-    .macro-card strong { color: var(--accent); font-size: 1.1rem; }
+    .macro-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; margin-bottom: 1rem; }
+    .macro-card { background: rgba(15, 23, 42, 0.6); border: 1px solid var(--card-border); padding: 0.8rem 0.5rem; border-radius: 10px; text-align: center; }
+    .macro-card span { font-size: 0.7rem; color: var(--text-muted); display: block; text-transform: uppercase; }
+    .macro-card strong { color: var(--accent); font-size: 1.15rem; font-weight: 700; }
 
-    /* Footer & Compliance Modals */
-    footer { text-align: center; padding: 2rem; border-top: 1px solid var(--border-color); color: var(--text-muted); font-size: 0.85rem; margin-top: 3rem; }
+    /* Footer & Modals */
+    footer { text-align: center; padding: 2rem; border-top: 1px solid var(--card-border); color: var(--text-muted); font-size: 0.8rem; margin-top: 3rem; background: rgba(15, 23, 42, 0.5); }
     footer a { color: var(--accent); text-decoration: none; margin: 0 0.5rem; cursor: pointer; }
     footer a:hover { text-decoration: underline; }
 
-    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); justify-content: center; align-items: center; z-index: 1000; }
-    .modal-content { background: var(--card-bg); padding: 2rem; border-radius: 12px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; position: relative; border: 1px solid var(--border-color); }
-    .close-modal { position: absolute; top: 1rem; right: 1rem; font-size: 1.5rem; color: var(--text-muted); cursor: pointer; }
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); justify-content: center; align-items: center; z-index: 1000; }
+    .modal-content { background: #1e293b; padding: 2rem; border-radius: 16px; max-width: 550px; width: 90%; max-height: 80vh; overflow-y: auto; position: relative; border: 1px solid var(--card-border); box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
+    .close-modal { position: absolute; top: 1rem; right: 1rem; font-size: 1.4rem; color: var(--text-muted); cursor: pointer; }
   </style>
 </head>
 <body>
 
   <header>
     <h1>NutriPulse Pro</h1>
-    <p>Free, Private & Instant Fitness & Nutrition Suite</p>
+    <p>Premium Fitness, Nutrition & Biometric Suite</p>
   </header>
 
   <nav>
-    <button class="tab-btn active" onclick="switchTab('calculator')">Target Calorie Calculator</button>
-    <button class="tab-btn" onclick="switchTab('tracker')">Food & Macro Database</button>
+    <button class="tab-btn active" onclick="switchTab('calculator')">TDEE Calculator</button>
+    <button class="tab-btn" onclick="switchTab('tracker')">Smart Food Analyzer</button>
     <button class="tab-btn" onclick="switchTab('water')">Water Tracker</button>
     <button class="tab-btn" onclick="switchTab('fasting')">Fasting Timer</button>
-    <button class="tab-btn" onclick="switchTab('recipes')">Recipes</button>
+    <button class="tab-btn" onclick="switchTab('recipes')">Pro Recipes</button>
     <button class="tab-btn" onclick="switchTab('workouts')">Workouts</button>
   </nav>
 
@@ -138,7 +146,7 @@
     <!-- Weight Goal & Calorie Target Calculator -->
     <section id="calculator" class="tab-content active">
       <div class="card">
-        <h2>Custom Weight Goal & Calorie Calculator</h2>
+        <h2>Target Calorie & Goal Calculator</h2>
         <div class="form-group">
           <label>Gender</label>
           <select id="gender"><option value="female">Female</option><option value="male">Male</option></select>
@@ -164,24 +172,24 @@
             <option value="1.725">Very Active (6-7 days heavy workout)</option>
           </select>
         </div>
-        <button class="btn" onclick="calculateTDEE()">Calculate Calorie & Macro Goals</button>
+        <button class="btn" onclick="calculateTDEE()">Calculate Biometric Targets</button>
         
         <div id="tdeeResult" class="result-box" style="display:none;">
-          <p>Your Baseline Maintenance Calorie Expenditure:</p>
-          <h3 id="tdeeValue" style="margin-bottom:0.8rem;">0 kcal</h3>
+          <p style="font-size:0.85rem; color:var(--text-muted);">Baseline Maintenance Expenditure:</p>
+          <h3 id="tdeeValue" style="margin-bottom:1rem;">0 kcal</h3>
 
           <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:0.5rem; text-align:center;">
-            <div style="background: #0f172a; padding: 0.6rem; border-radius: 6px; border: 1px solid var(--border-color);">
-              <span style="font-size:0.75rem; color:var(--text-muted);">Fat Loss</span>
-              <strong id="lossVal" style="display:block; color:var(--accent);">0 kcal</strong>
+            <div style="background: rgba(15,23,42,0.5); padding: 0.6rem; border-radius: 8px; border: 1px solid var(--card-border);">
+              <span style="font-size:0.7rem; color:var(--text-muted);">Fat Loss</span>
+              <strong id="lossVal" style="display:block; color:var(--accent); font-size:1rem;">0 kcal</strong>
             </div>
-            <div style="background: #0f172a; padding: 0.6rem; border-radius: 6px; border: 1px solid var(--border-color);">
-              <span style="font-size:0.75rem; color:var(--text-muted);">Maintain Weight</span>
-              <strong id="maintVal" style="display:block; color:white;">0 kcal</strong>
+            <div style="background: rgba(15,23,42,0.5); padding: 0.6rem; border-radius: 8px; border: 1px solid var(--card-border);">
+              <span style="font-size:0.7rem; color:var(--text-muted);">Maintain</span>
+              <strong id="maintVal" style="display:block; color:white; font-size:1rem;">0 kcal</strong>
             </div>
-            <div style="background: #0f172a; padding: 0.6rem; border-radius: 6px; border: 1px solid var(--border-color);">
-              <span style="font-size:0.75rem; color:var(--text-muted);">Healthy Weight Gain</span>
-              <strong id="gainVal" style="display:block; color:#3b82f6;">0 kcal</strong>
+            <div style="background: rgba(15,23,42,0.5); padding: 0.6rem; border-radius: 8px; border: 1px solid var(--card-border);">
+              <span style="font-size:0.7rem; color:var(--text-muted);">Muscle Gain</span>
+              <strong id="gainVal" style="display:block; color:#3b82f6; font-size:1rem;">0 kcal</strong>
             </div>
           </div>
         </div>
@@ -191,25 +199,25 @@
     <!-- Smart Automated Food & Macro Tracker -->
     <section id="tracker" class="tab-content">
       <div class="card">
-        <h2>Smart Instant Meal & Macro Analyzer</h2>
-        <p style="font-size:0.8rem; color: var(--text-muted); margin-bottom:1rem;">Type <strong>any meal or sentence</strong> (e.g., *1 bowl daal and 1 bowl chawal*, *2 rotis and paneer*, *chicken biryani*, *pizza*) to automatically generate complete calories, carbs, fiber, fat, sugar, and vitamins instantly!</p>
+        <h2>Smart Instant Meal Analyzer</h2>
+        <p style="font-size:0.8rem; color: var(--text-muted); margin-bottom:1rem;">Type <strong>any food or sentence</strong> (e.g., *1 bowl daal and 1 bowl chawal*, *paneer butter masala*, *chicken burger*, *pizza*) to instantly generate complete calories, carbs, fiber, fat, sugar, and vitamins!</p>
         
         <div class="form-group">
-          <label>Search / Type Any Meal</label>
+          <label>Search / Type Any Meal or Sentence</label>
           <div style="display:flex; gap:0.5rem;">
-            <input type="text" id="foodSearchInput" placeholder="Type meal (e.g., 1 bowl daal and 1 bowl chawal)">
-            <button class="btn" style="width: auto; white-space: nowrap; background:#3b82f6;" onclick="smartAnalyzeMeal()">Analyze Meal</button>
+            <input type="text" id="foodSearchInput" placeholder="Type meal (e.g., 2 rotis and daal)">
+            <button class="btn" style="width: auto; white-space: nowrap; background:#3b82f6;" onclick="smartAnalyzeMeal()">Analyze</button>
           </div>
         </div>
 
         <!-- Automated Detailed Nutrition Breakdown Card -->
         <div id="activeNutriCard" class="nutri-card" style="display:none;">
-          <span id="nutriBadge" class="nutri-badge badge-good">Auto-Calculated Analysis</span>
-          <h3 id="nutriFoodTitle" style="color:var(--accent);">Meal Name</h3>
-          <p id="portionDescText" style="font-size:0.85rem; color:#3b82f6; font-weight:600; margin-top:0.2rem;">Custom Portion Profile</p>
+          <span id="nutriBadge" class="nutri-badge">Auto-Calculated Analysis</span>
+          <h3 id="nutriFoodTitle" style="color:var(--accent); font-size:1.15rem;">Meal Name</h3>
+          <p id="portionDescText" style="font-size:0.8rem; color:#3b82f6; font-weight:600; margin-top:0.1rem;">Custom Portion Profile</p>
 
           <div class="form-group" style="margin-top:0.8rem; margin-bottom:0.8rem;">
-            <label style="color:var(--accent); font-weight:600;">Scale Portion Multiplier</label>
+            <label style="color:var(--accent); font-weight:600;">Portion Multiplier Scale</label>
             <select id="portionMultiplier" onchange="updatePortionScaling()">
               <option value="0.5">0.5x Portion (Half)</option>
               <option value="1" selected>1x Portion (Standard)</option>
@@ -220,25 +228,25 @@
           </div>
 
           <div class="nutri-grid">
-            <div class="nutri-item"><span>Calories</span><strong id="cardCals">0</strong><span style="font-size:0.6rem;">kcal</span></div>
+            <div class="nutri-item"><span>Calories</span><strong id="cardCals">0</strong><span style="font-size:0.55rem;">kcal</span></div>
             <div class="nutri-item"><span>Protein</span><strong id="cardProtein">0g</strong></div>
             <div class="nutri-item"><span>Carbs</span><strong id="cardCarbs">0g</strong></div>
             <div class="nutri-item"><span>Fats</span><strong id="cardFat">0g</strong></div>
           </div>
 
           <div class="nutri-grid" style="grid-template-columns: repeat(4, 1fr);">
-            <div class="nutri-item"><span>Dietary Fiber</span><strong id="cardFiber">0g</strong></div>
-            <div class="nutri-item"><span>Total Sugar</span><strong id="cardSugar">0g</strong></div>
+            <div class="nutri-item"><span>Fiber</span><strong id="cardFiber">0g</strong></div>
+            <div class="nutri-item"><span>Sugar</span><strong id="cardSugar">0g</strong></div>
             <div class="nutri-item"><span>Sodium</span><strong id="cardSodium">0mg</strong></div>
-            <div class="nutri-item"><span>Vitamins & Info</span><strong id="cardVitamins">Vit B, Iron</strong></div>
+            <div class="nutri-item"><span>Vitamins</span><strong id="cardVitamins" style="font-size: 0.75rem;">Vit B, Iron</strong></div>
           </div>
 
-          <button class="btn" style="margin-top:0.5rem;" onclick="logActiveFood()">+ Add To Today's Meal Log</button>
+          <button class="btn" style="margin-top:0.5rem;" onclick="logActiveFood()">+ Add To Today's Log</button>
         </div>
 
         <!-- Manual Quick Add Override Option -->
-        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-color);">
-          <h3 style="font-size:1rem; color:var(--text-muted); margin-bottom:0.5rem;">Manual Entry Form (Optional Override)</h3>
+        <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--card-border);">
+          <h3 style="font-size:0.95rem; color:var(--text-muted); margin-bottom:0.5rem;">Manual Override Entry</h3>
           <div class="form-group">
             <input type="text" id="manualName" placeholder="Custom Meal Name" style="margin-bottom:0.5rem;">
             <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:0.4rem;">
@@ -248,17 +256,33 @@
               <input type="number" id="manualFat" placeholder="Fat(g)">
             </div>
           </div>
-          <button class="btn" style="background:var(--card-bg); border:1px solid var(--accent); color:var(--accent);" onclick="addManualFood()">Quick Add Manual Meal</button>
+          <button class="btn" style="background:transparent; border:1px solid var(--accent); color:var(--accent);" onclick="addManualFood()">Quick Add Manual Meal</button>
         </div>
 
         <!-- Daily Logged Meals Summary -->
         <div style="margin-top: 1.5rem;">
-          <h3>Today's Daily Totals</h3>
-          <div class="macro-grid" style="margin-top:0.8rem;">
-            <div class="macro-card"><span>Total Calories</span><strong id="totalCals">0</strong><span style="font-size:0.65rem;">kcal</span></div>
-            <div class="macro-card"><span>Total Protein</span><strong id="totalProtein">0</strong><span style="font-size:0.65rem;">grams</span></div>
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+            <h3 style="font-size:1rem;">Today's Daily Totals</h3>
+            <button onclick="clearFoodLog()" style="background:transparent; border:none; color:#f87171; font-size:0.75rem; cursor:pointer; font-weight:600;">Clear All</button>
+          </div>
+          
+          <div class="macro-grid" style="margin-top:0.5rem;">
+            <div class="macro-card"><span>Calories</span><strong id="totalCals">0</strong><span style="font-size:0.55rem; color:var(--text-muted);">kcal</span></div>
+            <div class="macro-card"><span>Protein</span><strong id="totalProtein">0</strong><span style="font-size:0.55rem; color:var(--text-muted);">grams</span></div>
             <div class="macro-card"><span>Carbs / Fats</span><strong><span id="totalCarbs">0</span>g / <span id="totalFat">0</span>g</strong></div>
           </div>
+          
+          <!-- Calorie Target Progress Bar -->
+          <div style="margin-bottom:1rem;">
+            <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:var(--text-muted);">
+              <span>Daily Goal Progress</span>
+              <span id="progressText">0 / 2000 kcal</span>
+            </div>
+            <div class="progress-container">
+              <div id="calorieProgressBar" class="progress-bar"></div>
+            </div>
+          </div>
+
           <ul id="foodList" style="margin-top: 0.5rem;"></ul>
         </div>
       </div>
@@ -267,11 +291,11 @@
     <!-- Interactive Water Tracker -->
     <section id="water" class="tab-content">
       <div class="card">
-        <h2>Daily Hydration & Water Tracker</h2>
-        <p style="font-size: 0.85rem; color: var(--text-muted);">Recommended Goal: 2,000 ml (8 Glasses/day for optimal metabolism)</p>
+        <h2>Hydration & Water Tracker</h2>
+        <p style="font-size: 0.8rem; color: var(--text-muted);">Optimal Target: 2,000 ml (8 Glasses/day)</p>
         
         <div class="result-box" style="margin: 1rem 0;">
-          <p>Total Water Consumed Today:</p>
+          <p style="font-size:0.85rem; color:var(--text-muted);">Total Consumed Today:</p>
           <h3 id="waterDisplay" style="color: var(--water-color);">0 / 2000 ml</h3>
         </div>
 
@@ -287,8 +311,8 @@
         </div>
 
         <div style="display:flex; gap:0.5rem; margin-top:1rem;">
-          <button class="btn" style="background:var(--water-color);" onclick="addWater(250)">+ Add 250ml Glass</button>
-          <button class="btn" style="background:#ef4444;" onclick="resetWater()">Reset Hydration</button>
+          <button class="btn" style="background:var(--water-color);" onclick="addWater(250)">+ Add 250ml</button>
+          <button class="btn" style="background:rgba(239, 68, 68, 0.2); border:1px solid rgba(239, 68, 68, 0.4); color:#f87171;" onclick="resetWater()">Reset</button>
         </div>
       </div>
     </section>
@@ -296,100 +320,100 @@
     <!-- Fasting Timer Tab -->
     <section id="fasting" class="tab-content">
       <div class="card">
-        <h2>16:8 Intermittent Fasting Tracker</h2>
+        <h2>16:8 Intermittent Fasting</h2>
         <div class="timer-display" id="timerDisplay">16:00:00</div>
         <div class="timer-controls">
           <button class="btn" id="startTimerBtn" onclick="toggleTimer()">Start Fast</button>
-          <button class="btn" style="background:#ef4444;" onclick="resetTimer()">Reset</button>
+          <button class="btn" style="background:rgba(239, 68, 68, 0.2); border:1px solid rgba(239, 68, 68, 0.4); color:#f87171;" onclick="resetTimer()">Reset</button>
         </div>
-        <p id="fastStatus" style="text-align: center; margin-top: 1rem; color: var(--text-muted); font-size: 0.9rem;">Ready to start your fast.</p>
+        <p id="fastStatus" style="text-align: center; margin-top: 1rem; color: var(--text-muted); font-size: 0.85rem;">Ready to initiate protocol.</p>
       </div>
     </section>
 
     <!-- Recipes Tab -->
     <section id="recipes" class="tab-content">
       <div class="card">
-        <h2>Healthy High-Protein Recipes</h2>
+        <h2>Elite High-Protein Recipes</h2>
         <ul style="display: flex; flex-direction: column; gap: 0.8rem;">
-          <li style="flex-direction: column; align-items: flex-start; gap: 0.3rem;">
+          <li style="flex-direction: column; align-items: flex-start; gap: 0.2rem;">
             <strong style="color: var(--accent);">Avocado & Egg Power Toast</strong>
-            <span style="font-size: 0.85rem; color: var(--text-muted);">Whole-grain bread, 2 poached eggs, 1/2 avocado, chili flakes. (380 kcal | 18g Protein)</span>
+            <span style="font-size: 0.8rem; color: var(--text-muted);">Whole-grain bread, 2 poached eggs, 1/2 avocado, chili flakes. (380 kcal | 18g Protein)</span>
           </li>
-          <li style="flex-direction: column; align-items: flex-start; gap: 0.3rem;">
+          <li style="flex-direction: column; align-items: flex-start; gap: 0.2rem;">
             <strong style="color: var(--accent);">Grilled Chicken Quinoa Bowl</strong>
-            <span style="font-size: 0.85rem; color: var(--text-muted);">150g grilled chicken breast, cooked quinoa, roasted veggies, olive oil dressing. (520 kcal | 42g Protein)</span>
+            <span style="font-size: 0.8rem; color: var(--text-muted);">150g chicken breast, cooked quinoa, roasted veggies, olive oil. (520 kcal | 42g Protein)</span>
           </li>
-          <li style="flex-direction: column; align-items: flex-start; gap: 0.3rem;">
+          <li style="flex-direction: column; align-items: flex-start; gap: 0.2rem;">
             <strong style="color: var(--accent);">Greek Yogurt & Berry Medley</strong>
-            <span style="font-size: 0.85rem; color: var(--text-muted);">200g 0% Greek yogurt, mixed berries, chia seeds, drizzle of honey. (260 kcal | 23g Protein)</span>
+            <span style="font-size: 0.8rem; color: var(--text-muted);">200g Greek yogurt, mixed berries, chia seeds, honey. (260 kcal | 23g Protein)</span>
           </li>
         </ul>
       </div>
     </section>
 
-    <!-- Workouts Tab (Multi-Routine Selector) -->
+    <!-- Workouts Tab -->
     <section id="workouts" class="tab-content">
       <div class="card">
         <h2>Targeted Home Workouts</h2>
         <div class="form-group">
-          <label>Select Workout Focus</label>
+          <label>Select Routine Focus</label>
           <select id="workoutSelect" onchange="changeWorkout()">
             <option value="fullbody">Full-Body Fat Burner</option>
-            <option value="core">Core & Midsection Focus (Belly Fat)</option>
+            <option value="core">Core & Midsection Focus</option>
             <option value="upper">Neck, Upper Body & Posture</option>
           </select>
         </div>
 
         <div id="fullbodyRoutine">
-          <h3 style="color: var(--accent); margin-bottom: 0.8rem;">Full-Body Fat Burner</h3>
-          <ul style="display: flex; flex-direction: column; gap: 0.8rem;">
-            <li style="flex-direction: column; align-items: flex-start; gap: 0.2rem;">
+          <h3 style="color: var(--accent); font-size: 1.05rem; margin-bottom: 0.6rem;">Full-Body Fat Burner</h3>
+          <ul style="display: flex; flex-direction: column; gap: 0.6rem;">
+            <li style="flex-direction: column; align-items: flex-start; gap: 0.15rem;">
               <strong>1. Bodyweight Squats</strong>
-              <span style="font-size: 0.85rem; color: var(--text-muted);">3 Sets x 15 Reps (Engages overall muscle mass)</span>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">3 Sets x 15 Reps</span>
             </li>
-            <li style="flex-direction: column; align-items: flex-start; gap: 0.2rem;">
-              <strong>2. Standard or Incline Push-Ups</strong>
-              <span style="font-size: 0.85rem; color: var(--text-muted);">3 Sets x 10–12 Reps</span>
+            <li style="flex-direction: column; align-items: flex-start; gap: 0.15rem;">
+              <strong>2. Standard Push-Ups</strong>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">3 Sets x 12 Reps</span>
             </li>
-            <li style="flex-direction: column; align-items: flex-start; gap: 0.2rem;">
-              <strong>3. High-Knee Marching or Jog</strong>
-              <span style="font-size: 0.85rem; color: var(--text-muted);">3 Sets x 45 Seconds (Elevates heart rate for calorie burn)</span>
+            <li style="flex-direction: column; align-items: flex-start; gap: 0.15rem;">
+              <strong>3. High-Knee Marching</strong>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">3 Sets x 45 Seconds</span>
             </li>
           </ul>
         </div>
 
         <div id="coreRoutine" style="display: none;">
-          <h3 style="color: var(--accent); margin-bottom: 0.8rem;">Core & Midsection Focus (Belly Fat)</h3>
-          <ul style="display: flex; flex-direction: column; gap: 0.8rem;">
-            <li style="flex-direction: column; align-items: flex-start; gap: 0.2rem;">
+          <h3 style="color: var(--accent); font-size: 1.05rem; margin-bottom: 0.6rem;">Core & Midsection Focus</h3>
+          <ul style="display: flex; flex-direction: column; gap: 0.6rem;">
+            <li style="flex-direction: column; align-items: flex-start; gap: 0.15rem;">
               <strong>1. Core Plank Hold</strong>
-              <span style="font-size: 0.85rem; color: var(--text-muted);">3 Sets x 45 Seconds (Tones abdominal wall)</span>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">3 Sets x 45 Seconds</span>
             </li>
-            <li style="flex-direction: column; align-items: flex-start; gap: 0.2rem;">
+            <li style="flex-direction: column; align-items: flex-start; gap: 0.15rem;">
               <strong>2. Bicycle Crunches</strong>
-              <span style="font-size: 0.85rem; color: var(--text-muted);">3 Sets x 12 Reps per side</span>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">3 Sets x 12 Reps / side</span>
             </li>
-            <li style="flex-direction: column; align-items: flex-start; gap: 0.2rem;">
+            <li style="flex-direction: column; align-items: flex-start; gap: 0.15rem;">
               <strong>3. Mountain Climbers</strong>
-              <span style="font-size: 0.85rem; color: var(--text-muted);">3 Sets x 30 Seconds</span>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">3 Sets x 30 Seconds</span>
             </li>
           </ul>
         </div>
 
         <div id="upperRoutine" style="display: none;">
-          <h3 style="color: var(--accent); margin-bottom: 0.8rem;">Neck, Upper Body & Posture Routine</h3>
-          <ul style="display: flex; flex-direction: column; gap: 0.8rem;">
-            <li style="flex-direction: column; align-items: flex-start; gap: 0.2rem;">
-              <strong>1. Chin Tucks & Neck Retractions</strong>
-              <span style="font-size: 0.85rem; color: var(--text-muted);">2 Sets x 12 Reps (Strengthens posture & neck align)</span>
+          <h3 style="color: var(--accent); font-size: 1.05rem; margin-bottom: 0.6rem;">Neck, Upper Body & Posture Routine</h3>
+          <ul style="display: flex; flex-direction: column; gap: 0.6rem;">
+            <li style="flex-direction: column; align-items: flex-start; gap: 0.15rem;">
+              <strong>1. Chin Tucks & Retractions</strong>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">2 Sets x 12 Reps</span>
             </li>
-            <li style="flex-direction: column; align-items: flex-start; gap: 0.2rem;">
-              <strong>2. Arm Circles & Shoulder Squeezes</strong>
-              <span style="font-size: 0.85rem; color: var(--text-muted);">3 Sets x 30 Seconds</span>
+            <li style="flex-direction: column; align-items: flex-start; gap: 0.15rem;">
+              <strong>2. Arm Circles & Squeezes</strong>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">3 Sets x 30 Seconds</span>
             </li>
-            <li style="flex-direction: column; align-items: flex-start; gap: 0.2rem;">
+            <li style="font-size: 0.8rem; color: var(--text-muted);">
               <strong>3. Wall Push-Ups</strong>
-              <span style="font-size: 0.85rem; color: var(--text-muted);">3 Sets x 15 Reps</span>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">3 Sets x 15 Reps</span>
             </li>
           </ul>
         </div>
@@ -397,17 +421,17 @@
     </section>
 
     <!-- About Section -->
-    <div class="card" style="margin-top: 2rem;">
+    <div class="card" style="margin-top: 1.5rem;">
       <h2>About NutriPulse Pro</h2>
-      <p style="color: var(--text-muted); font-size: 0.9rem;">
-        NutriPulse Pro is a lightweight, zero-login utility built to streamline daily fitness and nutrition management. We believe health tools should be accessible, free, and completely secure. All calculated values, custom logs, water logs, and fasting logs stay inside your web browser using client-side `localStorage`. No tracking scripts or profiles are created.
+      <p style="color: var(--text-muted); font-size: 0.85rem;">
+        NutriPulse Pro is a zero-login privacy-first fitness suite. All calculated logs and goals reside securely within your browser storage (`localStorage`).
       </p>
     </div>
   </main>
 
   <footer>
     <p>&copy; 2026 NutriPulse Pro. All rights reserved.</p>
-    <p style="margin-top: 0.5rem;">
+    <p style="margin-top: 0.4rem;">
       <a onclick="openModal('privacyModal')">Privacy Policy</a> | 
       <a onclick="openModal('termsModal')">Terms of Service</a>
     </p>
@@ -418,11 +442,11 @@
     <div class="modal-content">
       <span class="close-modal" onclick="closeModal('privacyModal')">&times;</span>
       <h2 style="color: var(--accent); margin-bottom: 1rem;">Privacy Policy</h2>
-      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.8rem;">
-        NutriPulse Pro respects user privacy. This web utility operates entirely on client-side JavaScript. We do not maintain user databases, require email registrations, or collect personal health details on external servers.
+      <p style="color: var(--text-muted); font-size: 0.85rem; margin-bottom: 0.8rem;">
+        NutriPulse Pro operates entirely client-side. We do not store health telemetry or personal data on external servers.
       </p>
-      <p style="color: var(--text-muted); font-size: 0.9rem;">
-        Data entered into tools (such as macro logs or fasting timers) is stored locally on your device via browser `localStorage`. Google AdSense and third-party advertising partners may serve cookies to customize ads based on non-identifiable web visits.
+      <p style="color: var(--text-muted); font-size: 0.85rem;">
+        Ad networks like Google AdSense may utilize cookies for standard impression display.
       </p>
     </div>
   </div>
@@ -432,14 +456,13 @@
     <div class="modal-content">
       <span class="close-modal" onclick="closeModal('termsModal')">&times;</span>
       <h2 style="color: var(--accent); margin-bottom: 1rem;">Terms of Service</h2>
-      <p style="color: var(--text-muted); font-size: 0.9rem;">
-        The calculators, dietary information, and workout routines provided on NutriPulse Pro are meant strictly for educational and informational purposes. They do not constitute official medical or professional health advice. Always consult a qualified medical professional before starting new fitness regimens or fasting protocols.
+      <p style="color: var(--text-muted); font-size: 0.85rem;">
+        Calculators and workout schedules are for informational purposes only. Consult a healthcare provider before starting any nutrition protocol.
       </p>
     </div>
   </div>
 
   <script>
-    // Tab Switching Navigation
     function switchTab(tabId) {
       document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
       document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
@@ -447,7 +470,6 @@
       event.currentTarget.classList.add('active');
     }
 
-    // Workout Selector Logic
     function changeWorkout() {
       const selected = document.getElementById('workoutSelect').value;
       document.getElementById('fullbodyRoutine').style.display = (selected === 'fullbody') ? 'block' : 'none';
@@ -455,11 +477,11 @@
       document.getElementById('upperRoutine').style.display = (selected === 'upper') ? 'block' : 'none';
     }
 
-    // Modal Control Functions
     function openModal(id) { document.getElementById(id).style.display = 'flex'; }
     function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
-    // Target Calorie & Weight Goal Calculator
+    let currentTargetCalories = 2000;
+
     function calculateTDEE() {
       const gender = document.getElementById('gender').value;
       const age = parseFloat(document.getElementById('age').value);
@@ -473,21 +495,22 @@
       bmr += (gender === 'male') ? 5 : -161;
 
       const tdee = Math.round(bmr * activity);
+      currentTargetCalories = tdee - 500; // Default target to fat loss goal
+
       document.getElementById('tdeeValue').innerText = tdee + ' kcal';
       document.getElementById('maintVal').innerText = tdee + ' kcal';
       document.getElementById('lossVal').innerText = (tdee - 500) + ' kcal';
       document.getElementById('gainVal').innerText = (tdee + 300) + ' kcal';
       document.getElementById('tdeeResult').style.display = 'block';
+      renderFoodLog();
     }
 
     let activeSelectedFood = null;
 
-    // Smart Automated Meal Analyzer Engine (Handles any food, multi-item phrases, and sentence queries instantly)
     function smartAnalyzeMeal() {
       const rawInput = document.getElementById('foodSearchInput').value.toLowerCase().trim();
       if(!rawInput) return;
 
-      // Base macro dictionary for common Indian and global staples
       const foodDatabase = {
         "dal": { cals: 120, protein: 7, carbs: 18, fat: 2.5, fiber: 4, sugar: 1, sodium: 200, vitamins: "Iron, Folate" },
         "daal": { cals: 120, protein: 7, carbs: 18, fat: 2.5, fiber: 4, sugar: 1, sodium: 200, vitamins: "Iron, Folate" },
@@ -503,24 +526,16 @@
         "apple": { cals: 95, protein: 0.5, carbs: 25, fat: 0.3, fiber: 4.4, sugar: 19, sodium: 2, vitamins: "Vit C, Antioxidants" },
         "pizza": { cals: 280, protein: 12, carbs: 36, fat: 10, fiber: 2, sugar: 3, sodium: 580, vitamins: "Calcium, Lycopene" },
         "burger": { cals: 350, protein: 15, carbs: 40, fat: 14, fiber: 2, sugar: 5, sodium: 650, vitamins: "Iron, B-Vitamins" },
-        "salad": { cals: 150, protein: 4, carbs: 12, fat: 9, fiber: 5, sugar: 4, sodium: 220, vitamins: "Vit A, Vit C, K" }
+        "salad": { cals: 150, protein: 4, carbs: 12, fat: 9, fiber: 5, sugar: 4, sodium: 220, vitamins: "Vit A, C, K" }
       };
 
-      let totalCals = 0;
-      let totalProtein = 0;
-      let totalCarbs = 0;
-      let totalFat = 0;
-      let totalFiber = 0;
-      let totalSugar = 0;
-      let totalSodium = 0;
+      let totalCals = 0, totalProtein = 0, totalCarbs = 0, totalFat = 0, totalFiber = 0, totalSugar = 0, totalSodium = 0;
       let vitaminList = [];
+      let matched = false;
 
-      let matchedItems = [];
-
-      // Scan user text for any known keywords to composite the meal automatically
       for (let key in foodDatabase) {
         if (rawInput.includes(key)) {
-          matchedItems.push(key);
+          matched = true;
           let item = foodDatabase[key];
           totalCals += item.cals;
           totalProtein += item.protein;
@@ -533,21 +548,14 @@
         }
       }
 
-      // If no exact keyword matched, generate a smart AI-like estimate based on typical meal portions so it NEVER errors
-      if (matchedItems.length === 0) {
-        totalCals = 320;
-        totalProtein = 10;
-        totalCarbs = 40,
-        totalFat = 12;
-        totalFiber = 3;
-        totalSugar = 3;
-        totalSodium = 300;
-        vitaminList = ["Balanced Micronutrients"];
+      if (!matched) {
+        totalCals = 280; totalProtein = 10; totalCarbs = 35; totalFat = 10; totalFiber = 3; totalSugar = 3; totalSodium = 250;
+        vitaminList = ["Balanced Profile"];
       }
 
       activeSelectedFood = {
         name: rawInput.charAt(0).toUpperCase() + rawInput.slice(1),
-        servingDesc: "Auto-Calculated Full Portion Profile",
+        servingDesc: "Auto-Calculated Portion Profile",
         cals: totalCals,
         protein: Math.round(totalProtein * 10) / 10,
         carbs: Math.round(totalCarbs * 10) / 10,
@@ -555,7 +563,7 @@
         fiber: Math.round(totalFiber * 10) / 10,
         sugar: Math.round(totalSugar * 10) / 10,
         sodium: Math.round(totalSodium),
-        vitamins: vitaminList.join(", ") || "General Minerals & Vitamins"
+        vitamins: vitaminList.join(", ") || "Essential Micronutrients"
       };
 
       renderSelectedNutriCard(activeSelectedFood);
@@ -564,8 +572,7 @@
     function renderSelectedNutriCard(food) {
       document.getElementById('portionMultiplier').value = "1";
       document.getElementById('nutriFoodTitle').innerText = food.name;
-      document.getElementById('portionDescText').innerText = `Serving Profile: ${food.servingDesc}`;
-      
+      document.getElementById('portionDescText').innerText = `Profile: ${food.servingDesc}`;
       updatePortionScaling();
       document.getElementById('activeNutriCard').style.display = 'block';
     }
@@ -589,7 +596,7 @@
       const mult = parseFloat(document.getElementById('portionMultiplier').value) || 1;
 
       foodLog.push({
-        name: `${activeSelectedFood.name} (${mult}x portion)`,
+        name: `${activeSelectedFood.name} (${mult}x)`,
         cals: Math.round(activeSelectedFood.cals * mult),
         protein: Math.round(activeSelectedFood.protein * mult * 10) / 10,
         carbs: Math.round(activeSelectedFood.carbs * mult * 10) / 10,
@@ -609,7 +616,7 @@
       const fat = parseInt(document.getElementById('manualFat').value) || 0;
 
       if(!name || isNaN(cals)) {
-        alert("Please enter both a meal name and calories!");
+        alert("Please enter meal name and calories!");
         return;
       }
 
@@ -624,7 +631,6 @@
       renderFoodLog();
     }
 
-    // LocalStorage Macro Tracker
     let foodLog = JSON.parse(localStorage.getItem('nutriPulseLog')) || [];
 
     function renderFoodLog() {
@@ -641,11 +647,11 @@
         const li = document.createElement('li');
         li.innerHTML = `
           <div>
-            <strong>${item.name}</strong> - ${item.cals} kcal
+            <strong style="font-size:0.9rem;">${item.name}</strong> - <span style="color:var(--accent);">${item.cals} kcal</span>
             <br>
-            <span style="font-size:0.75rem; color:var(--text-muted);">Protein: ${item.protein || 0}g | Carbs: ${item.carbs || 0}g | Fat: ${item.fat || 0}g</span>
+            <span style="font-size:0.7rem; color:var(--text-muted);">P: ${item.protein || 0}g | C: ${item.carbs || 0}g | F: ${item.fat || 0}g</span>
           </div>
-          <button class="delete-btn" onclick="deleteFood(${index})">&times;</button>
+          <button class="delete-btn" onclick="deleteFood(${index})">Remove</button>
         `;
         list.appendChild(li);
       });
@@ -654,6 +660,11 @@
       document.getElementById('totalProtein').innerText = Math.round(totalP * 10) / 10;
       document.getElementById('totalCarbs').innerText = Math.round(totalCarb * 10) / 10;
       document.getElementById('totalFat').innerText = Math.round(totalF * 10) / 10;
+
+      // Update progress bar
+      const percent = Math.min(100, Math.round((totalC / currentTargetCalories) * 100));
+      document.getElementById('calorieProgressBar').style.width = percent + '%';
+      document.getElementById('progressText').innerText = `${totalC} / ${currentTargetCalories} kcal`;
     }
 
     function deleteFood(index) {
@@ -662,14 +673,18 @@
       renderFoodLog();
     }
 
-    // Water Tracker Logic
+    function clearFoodLog() {
+      foodLog = [];
+      localStorage.removeItem('nutriPulseLog');
+      renderFoodLog();
+    }
+
     let waterMl = parseInt(localStorage.getItem('nutriPulseWater')) || 0;
 
     function updateWaterDisplay() {
       document.getElementById('waterDisplay').innerText = `${waterMl} / 2000 ml`;
       const glasses = Math.min(8, Math.floor(waterMl / 250));
-      const btns = document.querySelectorAll('.glass-btn');
-      btns.forEach((btn, idx) => {
+      document.querySelectorAll('.glass-btn').forEach((btn, idx) => {
         if(idx < glasses) btn.classList.add('filled');
         else btn.classList.remove('filled');
       });
@@ -693,7 +708,6 @@
       updateWaterDisplay();
     }
 
-    // Fasting Timer Logic (16 Hours)
     let timerInterval = null;
     let fastSeconds = 16 * 3600;
     let isFasting = false;
@@ -705,8 +719,8 @@
       if (!isFasting) {
         isFasting = true;
         btn.innerText = "Pause Fast";
-        btn.style.background = "#eab308";
-        status.innerText = "Fast in progress! Stay hydrated.";
+        btn.style.background = "#f59e0b";
+        status.innerText = "Fast protocol active. Stay hydrated.";
         
         timerInterval = setInterval(() => {
           if (fastSeconds > 0) {
@@ -714,15 +728,15 @@
             updateTimerDisplay();
           } else {
             clearInterval(timerInterval);
-            status.innerText = "Fast Complete! Time to break your fast with a balanced meal.";
+            status.innerText = "Fast Complete! Time to break your fast.";
           }
         }, 1000);
       } else {
         isFasting = false;
         clearInterval(timerInterval);
         btn.innerText = "Resume Fast";
-        btn.style.background = "#10b981";
-        status.innerText = "Fast paused.";
+        btn.style.background = "var(--accent-grad)";
+        status.innerText = "Protocol paused.";
       }
     }
 
@@ -732,8 +746,8 @@
       fastSeconds = 16 * 3600;
       updateTimerDisplay();
       document.getElementById('startTimerBtn').innerText = "Start Fast";
-      document.getElementById('startTimerBtn').style.background = "#10b981";
-      document.getElementById('fastStatus').innerText = "Ready to start your fast.";
+      document.getElementById('startTimerBtn').style.background = "var(--accent-grad)";
+      document.getElementById('fastStatus').innerText = "Ready to initiate protocol.";
     }
 
     function updateTimerDisplay() {
@@ -743,7 +757,6 @@
       document.getElementById('timerDisplay').innerText = `${hrs}:${mins}:${secs}`;
     }
 
-    // Initial loads
     renderFoodLog();
     updateWaterDisplay();
   </script>
