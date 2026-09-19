@@ -206,24 +206,72 @@
       </div>
     </section>
 
-    <!-- Workouts Tab -->
+    <!-- Workouts Tab (Multi-Routine Selector) -->
     <section id="workouts" class="tab-content">
       <div class="card">
-        <h2>Quick Home Bodyweight Workout Routine</h2>
-        <ul style="display: flex; flex-direction: column; gap: 0.8rem;">
-          <li style="flex-direction: column; align-items: flex-start; gap: 0.2rem;">
-            <strong>1. Bodyweight Squats</strong>
-            <span style="font-size: 0.85rem; color: var(--text-muted);">3 Sets x 15 Reps (Focus on full depth)</span>
-          </li>
-          <li style="flex-direction: column; align-items: flex-start; gap: 0.2rem;">
-            <strong>2. Standard or Incline Push-Ups</strong>
-            <span style="font-size: 0.85rem; color: var(--text-muted);">3 Sets x 10–12 Reps</span>
-          </li>
-          <li style="flex-direction: column; align-items: flex-start; gap: 0.2rem;">
-            <strong>3. Core Plank Hold</strong>
-            <span style="font-size: 0.85rem; color: var(--text-muted);">3 Sets x 45 Seconds</span>
-          </li>
-        </ul>
+        <h2>Targeted Home Workouts</h2>
+        <div class="form-group">
+          <label>Select Workout Focus</label>
+          <select id="workoutSelect" onchange="changeWorkout()">
+            <option value="fullbody">Full-Body Fat Burner</option>
+            <option value="core">Core & Midsection Focus</option>
+            <option value="upper">Neck, Upper Body & Posture</option>
+          </select>
+        </div>
+
+        <div id="fullbodyRoutine">
+          <h3 style="color: var(--accent); margin-bottom: 0.8rem;">Full-Body Fat Burner</h3>
+          <ul style="display: flex; flex-direction: column; gap: 0.8rem;">
+            <li style="flex-direction: column; align-items: flex-start; gap: 0.2rem;">
+              <strong>1. Bodyweight Squats</strong>
+              <span style="font-size: 0.85rem; color: var(--text-muted);">3 Sets x 15 Reps (Engages overall muscle mass)</span>
+            </li>
+            <li style="flex-direction: column; align-items: flex-start; gap: 0.2rem;">
+              <strong>2. Standard or Incline Push-Ups</strong>
+              <span style="font-size: 0.85rem; color: var(--text-muted);">3 Sets x 10–12 Reps</span>
+            </li>
+            <li style="flex-direction: column; align-items: flex-start; gap: 0.2rem;">
+              <strong>3. High-Knee Marching or Jog</strong>
+              <span style="font-size: 0.85rem; color: var(--text-muted);">3 Sets x 45 Seconds (Elevates heart rate for calorie burn)</span>
+            </li>
+          </ul>
+        </div>
+
+        <div id="coreRoutine" style="display: none;">
+          <h3 style="color: var(--accent); margin-bottom: 0.8rem;">Core & Midsection Focus</h3>
+          <ul style="display: flex; flex-direction: column; gap: 0.8rem;">
+            <li style="flex-direction: column; align-items: flex-start; gap: 0.2rem;">
+              <strong>1. Core Plank Hold</strong>
+              <span style="font-size: 0.85rem; color: var(--text-muted);">3 Sets x 45 Seconds (Tones abdominal wall)</span>
+            </li>
+            <li style="flex-direction: column; align-items: flex-start; gap: 0.2rem;">
+              <strong>2. Bicycle Crunches</strong>
+              <span style="font-size: 0.85rem; color: var(--text-muted);">3 Sets x 12 Reps per side</span>
+            </li>
+            <li style="flex-direction: column; align-items: flex-start; gap: 0.2rem;">
+              <strong>3. Mountain Climbers</strong>
+              <span style="font-size: 0.85rem; color: var(--text-muted);">3 Sets x 30 Seconds</span>
+            </li>
+          </ul>
+        </div>
+
+        <div id="upperRoutine" style="display: none;">
+          <h3 style="color: var(--accent); margin-bottom: 0.8rem;">Neck, Upper Body & Posture Routine</h3>
+          <ul style="display: flex; flex-direction: column; gap: 0.8rem;">
+            <li style="flex-direction: column; align-items: flex-start; gap: 0.2rem;">
+              <strong>1. Chin Tucks & Neck Retractions</strong>
+              <span style="font-size: 0.85rem; color: var(--text-muted);">2 Sets x 12 Reps (Strengthens posture & neck align)</span>
+            </li>
+            <li style="flex-direction: column; align-items: flex-start; gap: 0.2rem;">
+              <strong>2. Arm Circles & Shoulder Squeezes</strong>
+              <span style="font-size: 0.85rem; color: var(--text-muted);">3 Sets x 30 Seconds</span>
+            </li>
+            <li style="flex-direction: column; align-items: flex-start; gap: 0.2rem;">
+              <strong>3. Wall Push-Ups</strong>
+              <span style="font-size: 0.85rem; color: var(--text-muted);">3 Sets x 15 Reps</span>
+            </li>
+          </ul>
+        </div>
       </div>
     </section>
 
@@ -276,6 +324,14 @@
       document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
       document.getElementById(tabId).classList.add('active');
       event.currentTarget.classList.add('active');
+    }
+
+    // Workout Selector Logic
+    function changeWorkout() {
+      const selected = document.getElementById('workoutSelect').value;
+      document.getElementById('fullbodyRoutine').style.display = (selected === 'fullbody') ? 'block' : 'none';
+      document.getElementById('coreRoutine').style.display = (selected === 'core') ? 'block' : 'none';
+      document.getElementById('upperRoutine').style.display = (selected === 'upper') ? 'block' : 'none';
     }
 
     // Modal Control Functions
