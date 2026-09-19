@@ -1,855 +1,400 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="google-adsense-account" content="ca-pub-XXXXXXXXXXXXXXXX">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <title>NutriPulse Pro - Free Global Calorie & Fitness Tracker</title>
-  <meta name="description" content="NutriPulse Pro is a fast, free, privacy-focused calorie, macro, fasting, and habit tracker. No login required.">
-  <meta name="keywords" content="NutriPulse, calorie counter, macro tracker, fasting timer, recipes, workout guide">
+  <title>NutriPulse Pro | Free Calorie Counter, Fasting Timer & Fitness Suite</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="NutriPulse Pro is a 100% free, privacy-first fitness web app. Track calories, log macros, manage 16:8 intermittent fasting, and access healthy recipes without creating an account.">
+  <meta name="keywords" content="NutriPulse, calorie counter, macro tracker, fasting timer, recipes, workout guide, free fitness app, privacy calorie tracker">
   <meta name="robots" content="index, follow">
-  <meta name="author" content="NutriPulse Pro">
+
+  <!-- Google Search Console Verification -->
+  <meta name="google-site-verification" content="qpyU7BJD6HGs-fZJuPX1_oUyjRUAHhAT2NXkVQDWxyE" />
+
+  <!-- Google AdSense Auto-Ads Script -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+
+  <!-- Open Graph / Social Sharing -->
+  <meta property="og:title" content="NutriPulse Pro - Free & Private Fitness Suite">
+  <meta property="og:description" content="Track your calories, macros, and fasting progress locally in your browser. No sign-ups or subscription fees required.">
+  <meta property="og:type" content="website">
+
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "NutriPulse Pro",
+    "category": "HealthAndFitnessApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "description": "A privacy-focused, zero-login calorie counter, macro logger, and intermittent fasting tracker."
+  }
+  </script>
 
   <style>
     :root {
       --bg-color: #0f172a;
       --card-bg: #1e293b;
-      --accent-color: #0284c7;
-      --accent-hover: #0369a1;
+      --accent: #10b981;
+      --accent-hover: #059669;
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
       --border-color: #334155;
-      --success-color: #10b981;
-      --danger-color: #ef4444;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; }
+    body { background-color: var(--bg-color); color: var(--text-main); line-height: 1.5; padding-bottom: 60px; }
+    header { background-color: var(--card-bg); border-bottom: 1px solid var(--border-color); padding: 1rem 2rem; text-align: center; }
+    header h1 { color: var(--accent); font-size: 1.8rem; font-weight: 700; }
+    header p { color: var(--text-muted); font-size: 0.9rem; margin-top: 0.2rem; }
 
-    body {
-      background-color: var(--bg-color);
-      color: var(--text-main);
-      padding: 16px;
-      max-width: 600px;
-      margin: 0 auto;
-    }
+    nav { display: flex; justify-content: center; gap: 0.5rem; background: var(--card-bg); padding: 0.5rem; border-bottom: 1px solid var(--border-color); flex-wrap: wrap; }
+    nav button { background: transparent; border: none; color: var(--text-muted); padding: 0.5rem 1rem; font-weight: 600; cursor: pointer; border-radius: 6px; transition: all 0.2s ease; }
+    nav button.active, nav button:hover { background: var(--accent); color: white; }
 
-    header {
-      text-align: center;
-      margin-bottom: 20px;
-    }
+    main { max-width: 900px; margin: 2rem auto; padding: 0 1rem; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
 
-    header h1 {
-      font-size: 1.8rem;
-      color: #38bdf8;
-    }
+    .card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; }
+    .card h2 { color: var(--accent); font-size: 1.3rem; margin-bottom: 1rem; }
 
-    header p {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      margin-top: 4px;
-    }
+    .form-group { margin-bottom: 1rem; }
+    .form-group label { display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.3rem; }
+    .form-group input, .form-group select { width: 100%; padding: 0.6rem; background: #0f172a; border: 1px solid var(--border-color); color: white; border-radius: 6px; outline: none; }
 
-    .card {
-      background-color: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 18px;
-      margin-bottom: 16px;
-      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    }
+    .btn { background: var(--accent); color: white; border: none; padding: 0.7rem 1.2rem; font-weight: 600; border-radius: 6px; cursor: pointer; width: 100%; transition: background 0.2s ease; }
+    .btn:hover { background: var(--accent-hover); }
 
-    .card h3 {
-      font-size: 1.1rem;
-      margin-bottom: 12px;
-      color: #f1f5f9;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+    .result-box { background: #0f172a; padding: 1rem; border-radius: 8px; margin-top: 1rem; text-align: center; border: 1px solid var(--border-color); }
+    .result-box h3 { color: var(--accent); font-size: 1.5rem; }
 
-    .stat-row {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 8px;
-      font-size: 0.95rem;
-    }
+    /* Fasting Timer */
+    .timer-display { font-size: 3rem; font-weight: 700; text-align: center; margin: 1.5rem 0; color: var(--accent); }
+    .timer-controls { display: flex; gap: 1rem; }
 
-    .input-group {
-      margin-bottom: 12px;
-    }
+    /* Loggers & Lists */
+    ul { list-style: none; }
+    li { background: #0f172a; padding: 0.75rem 1rem; border-radius: 6px; margin-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--border-color); }
+    .delete-btn { background: #ef4444; color: white; border: none; padding: 0.2rem 0.5rem; border-radius: 4px; cursor: pointer; }
 
-    .input-group label {
-      display: block;
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      margin-bottom: 4px;
-    }
+    /* Footer & Compliance Modals */
+    footer { text-align: center; padding: 2rem; border-top: 1px solid var(--border-color); color: var(--text-muted); font-size: 0.85rem; margin-top: 3rem; }
+    footer a { color: var(--accent); text-decoration: none; margin: 0 0.5rem; cursor: pointer; }
+    footer a:hover { text-decoration: underline; }
 
-    .input-row {
-      display: flex;
-      gap: 8px;
-    }
-
-    input, select {
-      width: 100%;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid var(--border-color);
-      background-color: #0f172a;
-      color: #fff;
-      font-size: 0.95rem;
-    }
-
-    .btn-primary {
-      width: 100%;
-      padding: 12px;
-      background-color: var(--accent-color);
-      border: none;
-      border-radius: 8px;
-      color: white;
-      font-weight: bold;
-      font-size: 0.95rem;
-      cursor: pointer;
-      margin-top: 8px;
-    }
-
-    .btn-primary:hover {
-      background-color: var(--accent-hover);
-    }
-
-    .btn-secondary {
-      padding: 8px 12px;
-      background-color: #334155;
-      border: none;
-      border-radius: 6px;
-      color: white;
-      font-size: 0.85rem;
-      cursor: pointer;
-    }
-
-    .btn-secondary:hover {
-      background-color: #475569;
-    }
-
-    .preset-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 8px;
-    }
-
-    .preset-chip {
-      background-color: #0f172a;
-      border: 1px solid var(--border-color);
-      color: #cbd5e1;
-      padding: 6px 10px;
-      border-radius: 16px;
-      font-size: 0.8rem;
-      cursor: pointer;
-    }
-
-    .preset-chip:hover {
-      border-color: #38bdf8;
-      color: #fff;
-    }
-
-    .fasting-timer-display {
-      text-align: center;
-      font-size: 2.2rem;
-      font-weight: bold;
-      color: #38bdf8;
-      margin: 12px 0;
-      letter-spacing: 2px;
-    }
-
-    .timer-btn-row {
-      display: flex;
-      gap: 10px;
-    }
-
-    .timer-btn-row button {
-      flex: 1;
-    }
-
-    .habit-list {
-      list-style: none;
-    }
-
-    .habit-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 0;
-      border-bottom: 1px solid #334155;
-      font-size: 0.9rem;
-    }
-
-    .habit-item:last-child {
-      border-bottom: none;
-    }
-
-    .habit-item input[type="checkbox"] {
-      width: 18px;
-      height: 18px;
-      accent-color: var(--accent-color);
-      cursor: pointer;
-    }
-
-    .guide-box {
-      background-color: #0f172a;
-      border-radius: 8px;
-      padding: 12px;
-      margin-top: 10px;
-      font-size: 0.88rem;
-      line-height: 1.5;
-    }
-
-    .log-list {
-      margin-top: 12px;
-      list-style: none;
-    }
-
-    .log-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #0f172a;
-      padding: 8px 12px;
-      border-radius: 6px;
-      margin-bottom: 6px;
-      font-size: 0.88rem;
-    }
-
-    .delete-btn {
-      color: var(--danger-color);
-      background: none;
-      border: none;
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 1.1rem;
-      margin-left: 8px;
-    }
-
-    /* Footer & Modal Styling */
-    footer {
-      text-align: center;
-      padding: 20px 0 30px;
-      color: var(--text-muted);
-      font-size: 0.85rem;
-      border-top: 1px solid var(--border-color);
-      margin-top: 20px;
-    }
-
-    footer a {
-      color: #38bdf8;
-      text-decoration: none;
-      margin: 0 8px;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-    }
-
-    .modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 1000;
-      padding: 16px;
-    }
-
-    .modal-content {
-      background-color: var(--card-bg);
-      border: 1px solid var(--border-color);
-      border-radius: 12px;
-      padding: 20px;
-      max-width: 500px;
-      max-height: 80vh;
-      overflow-y: auto;
-      font-size: 0.88rem;
-      line-height: 1.6;
-    }
-
-    .modal-content h3 {
-      color: #38bdf8;
-      margin-bottom: 12px;
-    }
-
-    .modal-content p {
-      margin-bottom: 10px;
-      color: var(--text-muted);
-    }
-
-    .close-modal-btn {
-      background-color: var(--accent-color);
-      color: white;
-      border: none;
-      padding: 8px 16px;
-      border-radius: 6px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 12px;
-      width: 100%;
-    }
+    .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); justify-content: center; align-items: center; z-index: 1000; }
+    .modal-content { background: var(--card-bg); padding: 2rem; border-radius: 12px; max-width: 600px; width: 90%; max-height: 80vh; overflow-y: auto; position: relative; border: 1px solid var(--border-color); }
+    .close-modal { position: absolute; top: 1rem; right: 1rem; font-size: 1.5rem; color: var(--text-muted); cursor: pointer; }
   </style>
 </head>
 <body>
 
   <header>
     <h1>NutriPulse Pro</h1>
-    <p>All-in-One Fitness, Fasting & Nutrition Companion</p>
+    <p>Free, Private & Instant Fitness & Nutrition Suite</p>
   </header>
 
-  <!-- 1. Daily Progress Summary -->
-  <div class="card">
-    <h3>
-      <span>📊 Daily Summary</span>
-      <button onclick="clearDayLog()" class="btn-secondary" style="font-size:0.75rem; padding:4px 8px; background-color:#ef4444;">Clear Day</button>
-    </h3>
-    <div class="stat-row">
-      <span>Calories:</span>
-      <strong id="calorieDisplay">0 / 1600 kcal</strong>
-    </div>
-    <div class="stat-row">
-      <span>Protein:</span>
-      <strong id="proteinDisplay">0 / 130 g</strong>
-    </div>
-    <div class="stat-row">
-      <span>Carbs:</span>
-      <strong id="carbDisplay">0 / 160 g</strong>
-    </div>
-    <div class="stat-row">
-      <span>Fats:</span>
-      <strong id="fatDisplay">0 / 45 g</strong>
-    </div>
-    <button onclick="copyDailySummary()" class="btn-primary" style="margin-top: 12px; background-color: #10b981;">📋 Copy Daily Report</button>
-  </div>
+  <nav>
+    <button class="tab-btn active" onclick="switchTab('calculator')">TDEE Calculator</button>
+    <button class="tab-btn" onclick="switchTab('fasting')">Fasting Timer</button>
+    <button class="tab-btn" onclick="switchTab('tracker')">Macro Tracker</button>
+    <button class="tab-btn" onclick="switchTab('recipes')">Recipes</button>
+    <button class="tab-btn" onclick="switchTab('workouts')">Workouts</button>
+  </nav>
 
-  <!-- 2. Water Hydration Tracker -->
-  <div class="card">
-    <h3>💧 Water Hydration Tracker</h3>
-    <div class="stat-row" style="margin-bottom: 12px;">
-      <span>Daily Intake:</span>
-      <strong id="waterDisplay">0 / 2500 ml</strong>
-    </div>
-    <div class="timer-btn-row">
-      <button onclick="addWater(250)" class="btn-primary" style="margin-top:0;">+250 ml</button>
-      <button onclick="addWater(500)" class="btn-primary" style="margin-top:0; background-color:#0369a1;">+500 ml</button>
-      <button onclick="resetWater()" class="btn-secondary">Reset</button>
-    </div>
-  </div>
-
-  <!-- 3. Auto TDEE Goal Calculator -->
-  <div class="card">
-    <h3>🎯 Personalized Goal Calculator</h3>
-    <div class="input-group">
-      <label>Gender:</label>
-      <select id="userGender">
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-      </select>
-    </div>
-    <div class="input-group">
-      <label>Age:</label>
-      <input type="number" id="userAge" min="1" placeholder="e.g. 25">
-    </div>
-    <div class="input-group">
-      <label>Height (cm):</label>
-      <input type="number" id="userHeight" min="1" placeholder="e.g. 175">
-    </div>
-    <div class="input-group">
-      <label>Weight (kg):</label>
-      <input type="number" id="userWeight" min="1" placeholder="e.g. 70">
-    </div>
-    <div class="input-group">
-      <label>Goal:</label>
-      <select id="userGoal">
-        <option value="fat_loss">Fat Loss (-500 kcal)</option>
-        <option value="maintain">Maintain Weight</option>
-        <option value="gain">Muscle Gain (+300 kcal)</option>
-      </select>
-    </div>
-    <button onclick="calculateTargets()" class="btn-primary">Calculate & Save Targets</button>
-  </div>
-
-  <!-- 4. Intermittent Fasting Timer -->
-  <div class="card">
-    <h3>⏱️ Intermittent Fasting Timer (16:8)</h3>
-    <div class="fasting-timer-display" id="fastingTimerDisplay">16:00:00</div>
-    <p id="fastingStatus" style="text-align: center; color: var(--text-muted); font-size: 0.85rem; margin-bottom: 10px;">Status: Not Started</p>
-    <div class="timer-btn-row">
-      <button onclick="startFastingTimer()" class="btn-primary" style="margin-top:0;">Start Fast</button>
-      <button onclick="resetFastingTimer()" class="btn-secondary">Reset</button>
-    </div>
-  </div>
-
-  <!-- 5. Quick Food & Activity Logger -->
-  <div class="card">
-    <h3>📝 Log Meal or Activity</h3>
-    <div class="input-group">
-      <label>Global Quick Meal Presets:</label>
-      <div class="preset-buttons">
-        <span class="preset-chip" onclick="quickLog('Chicken Salad', 350, 40, 12, 10)">Chicken Salad</span>
-        <span class="preset-chip" onclick="quickLog('PB Oatmeal', 380, 14, 52, 14)">PB Oatmeal</span>
-        <span class="preset-chip" onclick="quickLog('Eggs & Toast', 280, 18, 22, 12)">Eggs & Toast</span>
-        <span class="preset-chip" onclick="quickLog('Greek Yogurt', 220, 20, 25, 2)">Greek Yogurt</span>
-        <span class="preset-chip" onclick="quickLog('Protein Shake', 150, 25, 3, 2)">Protein Shake</span>
+  <main>
+    <!-- TDEE Calculator Tab -->
+    <section id="calculator" class="tab-content active">
+      <div class="card">
+        <h2>TDEE & Macro Calculator</h2>
+        <div class="form-group">
+          <label>Gender</label>
+          <select id="gender"><option value="male">Male</option><option value="female">Female</option></select>
+        </div>
+        <div class="form-group">
+          <label>Age (years)</label>
+          <input type="number" id="age" value="25">
+        </div>
+        <div class="form-group">
+          <label>Weight (kg)</label>
+          <input type="number" id="weight" value="70">
+        </div>
+        <div class="form-group">
+          <label>Height (cm)</label>
+          <input type="number" id="height" value="175">
+        </div>
+        <div class="form-group">
+          <label>Activity Level</label>
+          <select id="activity">
+            <option value="1.2">Sedentary (Office job)</option>
+            <option value="1.375">Light Exercise (1-2 days/wk)</option>
+            <option value="1.55">Moderate Exercise (3-5 days/wk)</option>
+            <option value="1.725">Heavy Exercise (6-7 days/wk)</option>
+          </select>
+        </div>
+        <button class="btn" onclick="calculateTDEE()">Calculate Targets</button>
+        <div id="tdeeResult" class="result-box" style="display:none;">
+          <p>Your Daily Energy Expenditure:</p>
+          <h3 id="tdeeValue">0 kcal</h3>
+          <p style="margin-top:0.5rem; font-size: 0.85rem; color: var(--text-muted);">
+            Maintenance: <span id="maintVal">0</span> | Fat Loss: <span id="lossVal">0</span> | Muscle Gain: <span id="gainVal">0</span>
+          </p>
+        </div>
       </div>
-    </div>
-    <div class="input-group">
-      <label>Custom Meal Name:</label>
-      <input type="text" id="customLogInput" placeholder="e.g. Avocado Toast with Eggs">
-    </div>
-    <div class="input-row">
-      <div class="input-group" style="flex:1;">
-        <label>Calories (kcal):</label>
-        <input type="number" id="customCalInput" min="1" placeholder="350">
+    </section>
+
+    <!-- Fasting Timer Tab -->
+    <section id="fasting" class="tab-content">
+      <div class="card">
+        <h2>16:8 Intermittent Fasting Tracker</h2>
+        <div class="timer-display" id="timerDisplay">16:00:00</div>
+        <div class="timer-controls">
+          <button class="btn" id="startTimerBtn" onclick="toggleTimer()">Start Fast</button>
+          <button class="btn" style="background:#ef4444;" onclick="resetTimer()">Reset</button>
+        </div>
+        <p id="fastStatus" style="text-align: center; margin-top: 1rem; color: var(--text-muted); font-size: 0.9rem;">Ready to start your fast.</p>
       </div>
-      <div class="input-group" style="flex:1;">
-        <label>Protein (g):</label>
-        <input type="number" id="customProteinInput" min="0" placeholder="20">
+    </section>
+
+    <!-- Macro Tracker Tab -->
+    <section id="tracker" class="tab-content">
+      <div class="card">
+        <h2>Daily Food & Macro Logger</h2>
+        <div class="form-group">
+          <label>Item Name</label>
+          <input type="text" id="foodName" placeholder="e.g., Oatmeal with Berries">
+        </div>
+        <div class="form-group">
+          <label>Calories (kcal)</label>
+          <input type="number" id="foodCals" placeholder="e.g., 350">
+        </div>
+        <button class="btn" onclick="addFoodItem()">Log Meal</button>
+
+        <div style="margin-top: 1.5rem;">
+          <h3>Today's Log (<span id="totalCals">0</span> kcal)</h3>
+          <ul id="foodList" style="margin-top: 0.5rem;"></ul>
+        </div>
       </div>
-    </div>
-    <div class="input-row">
-      <div class="input-group" style="flex:1;">
-        <label>Carbs (g):</label>
-        <input type="number" id="customCarbInput" min="0" placeholder="30">
+    </section>
+
+    <!-- Recipes Tab -->
+    <section id="recipes" class="tab-content">
+      <div class="card">
+        <h2>Healthy High-Protein Recipes</h2>
+        <ul style="display: flex; flex-direction: column; gap: 0.8rem;">
+          <li style="flex-direction: column; align-items: flex-start; gap: 0.3rem;">
+            <strong style="color: var(--accent);">Avocado & Egg Power Toast</strong>
+            <span style="font-size: 0.85rem; color: var(--text-muted);">Whole-grain bread, 2 poached eggs, 1/2 avocado, chili flakes. (380 kcal | 18g Protein)</span>
+          </li>
+          <li style="flex-direction: column; align-items: flex-start; gap: 0.3rem;">
+            <strong style="color: var(--accent);">Grilled Chicken Quinoa Bowl</strong>
+            <span style="font-size: 0.85rem; color: var(--text-muted);">150g grilled chicken breast, cooked quinoa, roasted veggies, olive oil dressing. (520 kcal | 42g Protein)</span>
+          </li>
+          <li style="flex-direction: column; align-items: flex-start; gap: 0.3rem;">
+            <strong style="color: var(--accent);">Greek Yogurt & Berry Medley</strong>
+            <span style="font-size: 0.85rem; color: var(--text-muted);">200g 0% Greek yogurt, mixed berries, chia seeds, drizzle of honey. (260 kcal | 23g Protein)</span>
+          </li>
+        </ul>
       </div>
-      <div class="input-group" style="flex:1;">
-        <label>Fats (g):</label>
-        <input type="number" id="customFatInput" min="0" placeholder="10">
+    </section>
+
+    <!-- Workouts Tab -->
+    <section id="workouts" class="tab-content">
+      <div class="card">
+        <h2>Quick Home Bodyweight Workout Routine</h2>
+        <ul style="display: flex; flex-direction: column; gap: 0.8rem;">
+          <li style="flex-direction: column; align-items: flex-start; gap: 0.2rem;">
+            <strong>1. Bodyweight Squats</strong>
+            <span style="font-size: 0.85rem; color: var(--text-muted);">3 Sets x 15 Reps (Focus on full depth)</span>
+          </li>
+          <li style="flex-direction: column; align-items: flex-start; gap: 0.2rem;">
+            <strong>2. Standard or Incline Push-Ups</strong>
+            <span style="font-size: 0.85rem; color: var(--text-muted);">3 Sets x 10–12 Reps</span>
+          </li>
+          <li style="flex-direction: column; align-items: flex-start; gap: 0.2rem;">
+            <strong>3. Core Plank Hold</strong>
+            <span style="font-size: 0.85rem; color: var(--text-muted);">3 Sets x 45 Seconds</span>
+          </li>
+        </ul>
       </div>
-    </div>
-    <button onclick="logCustomEntry()" class="btn-primary">Add Entry</button>
+    </section>
 
-    <ul class="log-list" id="logList"></ul>
-  </div>
-
-  <!-- 6. Daily Health Habit Checklist -->
-  <div class="card">
-    <h3>✅ Daily Health Habits</h3>
-    <ul class="habit-list">
-      <li class="habit-item"><input type="checkbox" id="habit1" onchange="saveHabits()"><label for="habit1">Walked 8,000+ Steps</label></li>
-      <li class="habit-item"><input type="checkbox" id="habit2" onchange="saveHabits()"><label for="habit2">Drank 2.5L+ Water 💧</label></li>
-      <li class="habit-item"><input type="checkbox" id="habit3" onchange="saveHabits()"><label for="habit3">Hit Daily Protein Goal</label></li>
-      <li class="habit-item"><input type="checkbox" id="habit4" onchange="saveHabits()"><label for="habit4">7+ Hours Quality Sleep 😴</label></li>
-    </ul>
-  </div>
-
-  <!-- 7. Global High-Protein Recipe Hub -->
-  <div class="card">
-    <h3>🥗 Curated Recipe Hub</h3>
-    <div class="input-group">
-      <label>Filter by Goal:</label>
-      <select id="recipeFilter" onchange="filterRecipes()">
-        <option value="fat_loss">Fat Loss (High Protein / Low Cal)</option>
-        <option value="weight_gain">Weight Gain (Calorie Dense)</option>
-      </select>
+    <!-- About Section -->
+    <div class="card" style="margin-top: 2rem;">
+      <h2>About NutriPulse Pro</h2>
+      <p style="color: var(--text-muted); font-size: 0.9rem;">
+        NutriPulse Pro is a lightweight, zero-login utility built to streamline daily fitness and nutrition management. We believe health tools should be accessible, free, and completely secure. All calculated values, custom logs, and fasting logs stay inside your web browser using client-side `localStorage`. No tracking scripts or profiles are created.
+      </p>
     </div>
-    <div class="guide-box" id="recipeDisplay">
-      <p><strong>🥗 Lemon Herb Grilled Chicken Bowl</strong></p>
-      <p style="color: #38bdf8;">• 340 kcal | 42g Protein | 15g Carbs | 8g Fat</p>
-      <p style="color: var(--text-muted); margin-top: 4px;">150g grilled chicken breast served over leafy greens, cherry tomatoes, and 1 tsp olive oil lemon dressing.</p>
-    </div>
-  </div>
-
-  <!-- 8. Targeted Exercise Guide -->
-  <div class="card">
-    <h3>🏋️ Targeted Exercise & Workout Guide</h3>
-    <div class="input-group">
-      <label>Select Target Area / Goal:</label>
-      <select id="exerciseFilter" onchange="filterWorkouts()">
-        <option value="core">Belly Fat & Core Tone</option>
-        <option value="neck">Neck & Posture Alignment</option>
-        <option value="fullbody">Full Body Fat Loss</option>
-      </select>
-    </div>
-    <div class="guide-box" id="exerciseDisplay">
-      <p><strong>🔥 Core & Belly Tone Focus:</strong></p>
-      <p style="color: var(--text-muted); margin-top: 4px;">Note: Spot reduction is a myth—overall body fat loss comes from your calorie deficit! Strengthen your core with: 1. Plank Holds (3x45s) 2. Bicycle Crunches (3x20) 3. Lying Leg Raises (3x15).</p>
-    </div>
-  </div>
-
-  <!-- 9. About Us & Footer Section (Required by Google AdSense) -->
-  <div class="card">
-    <h3>ℹ️ About NutriPulse Pro</h3>
-    <p style="color: var(--text-muted); font-size: 0.88rem; line-height: 1.5;">
-      NutriPulse Pro is a fast, free, and privacy-first fitness companion designed to help users globally calculate TDEE, track macros, follow intermittent fasting schedules, and build daily healthy habits without requiring account registration or server data collection.
-    </p>
-  </div>
+  </main>
 
   <footer>
-    <p>© 2026 NutriPulse Pro. All rights reserved.</p>
-    <p style="margin-top: 8px;">
-      <a href="javascript:void(0)" onclick="openModal('privacyModal')">Privacy Policy</a> | 
-      <a href="javascript:void(0)" onclick="openModal('termsModal')">Terms of Service</a>
+    <p>&copy; 2026 NutriPulse Pro. All rights reserved.</p>
+    <p style="margin-top: 0.5rem;">
+      <a onclick="openModal('privacyModal')">Privacy Policy</a> | 
+      <a onclick="openModal('termsModal')">Terms of Service</a>
     </p>
   </footer>
 
-  <!-- Modal Popups for Policy Pages -->
-  <div id="privacyModal" class="modal-overlay">
+  <!-- Privacy Policy Modal -->
+  <div id="privacyModal" class="modal">
     <div class="modal-content">
-      <h3>Privacy Policy</h3>
-      <p><strong>Last Updated: 2026</strong></p>
-      <p>NutriPulse Pro respects your personal privacy. We do not require account logins or collect personal data on external servers. All information entered (calories, macros, fasting times, and habits) is stored locally inside your browser using HTML5 LocalStorage.</p>
-      <p><strong>Third-Party Services:</strong> We use Google AdSense to serve non-personalized and contextual advertisements. Third-party vendors, including Google, use cookies to serve ads based on prior web activity. Users may opt out of personalized advertising by visiting Google Ad Settings.</p>
-      <button class="close-modal-btn" onclick="closeModal('privacyModal')">Close</button>
+      <span class="close-modal" onclick="closeModal('privacyModal')">&times;</span>
+      <h2 style="color: var(--accent); margin-bottom: 1rem;">Privacy Policy</h2>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 0.8rem;">
+        NutriPulse Pro respects user privacy. This web utility operates entirely on client-side JavaScript. We do not maintain user databases, require email registrations, or collect personal health details on external servers.
+      </p>
+      <p style="color: var(--text-muted); font-size: 0.9rem;">
+        Data entered into tools (such as macro logs or fasting timers) is stored locally on your device via browser `localStorage`. Google AdSense and third-party advertising partners may serve cookies to customize ads based on non-identifiable web visits.
+      </p>
     </div>
   </div>
 
-  <div id="termsModal" class="modal-overlay">
+  <!-- Terms Modal -->
+  <div id="termsModal" class="modal">
     <div class="modal-content">
-      <h3>Terms of Service</h3>
-      <p>NutriPulse Pro provides fitness calculations, nutrition guides, and habit tracking for general informational purposes only. The information provided does not constitute professional medical advice.</p>
-      <p>By using NutriPulse Pro, you agree that you are utilizing the app at your own risk and discretion.</p>
-      <button class="close-modal-btn" onclick="closeModal('termsModal')">Close</button>
+      <span class="close-modal" onclick="closeModal('termsModal')">&times;</span>
+      <h2 style="color: var(--accent); margin-bottom: 1rem;">Terms of Service</h2>
+      <p style="color: var(--text-muted); font-size: 0.9rem;">
+        The calculators, dietary information, and workout routines provided on NutriPulse Pro are meant strictly for educational and informational purposes. They do not constitute official medical or professional health advice. Always consult a qualified medical professional before starting new fitness regimens or fasting protocols.
+      </p>
     </div>
   </div>
 
   <script>
-    // State management
-    let state = {
-      targets: { calories: 1600, protein: 130, carbs: 160, fats: 45 },
-      logged: { calories: 0, protein: 0, carbs: 0, fats: 0, water: 0 },
-      entries: [],
-      lastDate: new Date().toISOString().split('T')[0]
-    };
-
-    // Auto Midnight Reset Check
-    function checkMidnightReset() {
-      const today = new Date().toISOString().split('T')[0];
-      if (state.lastDate !== today) {
-        state.logged = { calories: 0, protein: 0, carbs: 0, fats: 0, water: 0 };
-        state.entries = [];
-        state.lastDate = today;
-        saveState();
-        resetHabitsCheckboxes();
-      }
+    // Tab Switching Navigation
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      event.currentTarget.classList.add('active');
     }
 
-    function resetHabitsCheckboxes() {
-      ['habit1', 'habit2', 'habit3', 'habit4'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.checked = false;
-      });
-      localStorage.removeItem('nutripulse_habits');
-    }
+    // Modal Control Functions
+    function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+    function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
-    // Auto TDEE Calculation Logic
-    function calculateTargets() {
-      const gender = document.getElementById('userGender').value;
-      const age = parseFloat(document.getElementById('userAge').value);
-      const height = parseFloat(document.getElementById('userHeight').value);
-      const weight = parseFloat(document.getElementById('userWeight').value);
-      const goal = document.getElementById('userGoal').value;
+    // TDEE Calculation Logic
+    function calculateTDEE() {
+      const gender = document.getElementById('gender').value;
+      const age = parseFloat(document.getElementById('age').value);
+      const weight = parseFloat(document.getElementById('weight').value);
+      const height = parseFloat(document.getElementById('height').value);
+      const activity = parseFloat(document.getElementById('activity').value);
 
-      if (!age || age <= 0 || !height || height <= 0 || !weight || weight <= 0) {
-        alert("Please enter valid positive numbers for age, height, and weight!");
-        return;
-      }
+      if(!age || !weight || !height) return;
 
       let bmr = (10 * weight) + (6.25 * height) - (5 * age);
-      bmr = (gender === 'male') ? bmr + 5 : bmr - 161;
+      bmr += (gender === 'male') ? 5 : -161;
 
-      let tdee = bmr * 1.375;
-
-      let targetCalories = tdee;
-      if (goal === 'fat_loss') targetCalories = tdee - 500;
-      if (goal === 'gain') targetCalories = tdee + 300;
-
-      targetCalories = Math.round(targetCalories);
-
-      let targetProtein = Math.round(weight * 2.0); 
-      let targetFat = Math.round((targetCalories * 0.25) / 9);
-      let targetCarbs = Math.round((targetCalories - (targetProtein * 4) - (targetFat * 9)) / 4);
-
-      state.targets = { calories: targetCalories, protein: targetProtein, carbs: targetCarbs, fats: targetFat };
-      saveState();
-      updateUI();
-      alert(`Targets Saved! Daily Goal: ${targetCalories} kcal`);
+      const tdee = Math.round(bmr * activity);
+      document.getElementById('tdeeValue').innerText = tdee + ' kcal';
+      document.getElementById('maintVal').innerText = tdee;
+      document.getElementById('lossVal').innerText = tdee - 500;
+      document.getElementById('gainVal').innerText = tdee + 300;
+      document.getElementById('tdeeResult').style.display = 'block';
     }
 
-    function updateUI() {
-      document.getElementById('calorieDisplay').innerText = `${state.logged.calories} / ${state.targets.calories} kcal`;
-      document.getElementById('proteinDisplay').innerText = `${state.logged.protein} / ${state.targets.protein} g`;
-      document.getElementById('carbDisplay').innerText = `${state.logged.carbs} / ${state.targets.carbs} g`;
-      document.getElementById('fatDisplay').innerText = `${state.logged.fats} / ${state.targets.fats} g`;
-      document.getElementById('waterDisplay').innerText = `${state.logged.water} / 2500 ml`;
-      renderEntries();
-    }
+    // Fasting Timer Logic (16 Hours)
+    let timerInterval = null;
+    let fastSeconds = 16 * 3600;
+    let isFasting = false;
 
-    // Water Tracking Functions
-    function addWater(amount) {
-      state.logged.water += amount;
-      if (state.logged.water >= 2500) {
-        const h2 = document.getElementById('habit2');
-        if (h2) {
-          h2.checked = true;
-          saveHabits();
-        }
-      }
-      saveState();
-      updateUI();
-    }
+    function toggleTimer() {
+      const btn = document.getElementById('startTimerBtn');
+      const status = document.getElementById('fastStatus');
 
-    function resetWater() {
-      state.logged.water = 0;
-      const h2 = document.getElementById('habit2');
-      if (h2) {
-        h2.checked = false;
-        saveHabits();
-      }
-      saveState();
-      updateUI();
-    }
-
-    // Food Logging Functions
-    function quickLog(name, cal, p, c, f) {
-      const entry = { id: Date.now(), name, cal, p, c, f };
-      addEntry(entry);
-    }
-
-    function logCustomEntry() {
-      const name = document.getElementById('customLogInput').value;
-      const cal = parseInt(document.getElementById('customCalInput').value) || 0;
-      const p = parseInt(document.getElementById('customProteinInput').value) || 0;
-      const c = parseInt(document.getElementById('customCarbInput').value) || 0;
-      const f = parseInt(document.getElementById('customFatInput').value) || 0;
-
-      if (!name || cal <= 0) {
-        alert("Please enter a meal name and a positive calorie amount.");
-        return;
-      }
-
-      const entry = { id: Date.now(), name, cal, p, c, f };
-      addEntry(entry);
-
-      document.getElementById('customLogInput').value = '';
-      document.getElementById('customCalInput').value = '';
-      document.getElementById('customProteinInput').value = '';
-      document.getElementById('customCarbInput').value = '';
-      document.getElementById('customFatInput').value = '';
-    }
-
-    function addEntry(entry) {
-      state.entries.push(entry);
-      recalculateLoggedTotals();
-      saveState();
-      updateUI();
-    }
-
-    function deleteEntry(id) {
-      state.entries = state.entries.filter(e => e.id !== id);
-      recalculateLoggedTotals();
-      saveState();
-      updateUI();
-    }
-
-    function clearDayLog() {
-      if (confirm("Reset all logged meals and calories for today?")) {
-        state.logged.calories = 0;
-        state.logged.protein = 0;
-        state.logged.carbs = 0;
-        state.logged.fats = 0;
-        state.entries = [];
-        saveState();
-        updateUI();
+      if (!isFasting) {
+        isFasting = true;
+        btn.innerText = "Pause Fast";
+        btn.style.background = "#eab308";
+        status.innerText = "Fast in progress! Stay hydrated.";
+        
+        timerInterval = setInterval(() => {
+          if (fastSeconds > 0) {
+            fastSeconds--;
+            updateTimerDisplay();
+          } else {
+            clearInterval(timerInterval);
+            status.innerText = "Fast Complete! Time to break your fast with a balanced meal.";
+          }
+        }, 1000);
+      } else {
+        isFasting = false;
+        clearInterval(timerInterval);
+        btn.innerText = "Resume Fast";
+        btn.style.background = "#10b981";
+        status.innerText = "Fast paused.";
       }
     }
 
-    function recalculateLoggedTotals() {
-      let cal = 0, p = 0, c = 0, f = 0;
-      state.entries.forEach(e => {
-        cal += e.cal;
-        p += e.p;
-        c += e.c;
-        f += e.f;
-      });
-      state.logged.calories = cal;
-      state.logged.protein = p;
-      state.logged.carbs = c;
-      state.logged.fats = f;
+    function resetTimer() {
+      clearInterval(timerInterval);
+      isFasting = false;
+      fastSeconds = 16 * 3600;
+      updateTimerDisplay();
+      document.getElementById('startTimerBtn').innerText = "Start Fast";
+      document.getElementById('startTimerBtn').style.background = "#10b981";
+      document.getElementById('fastStatus').innerText = "Ready to start your fast.";
     }
 
-    function renderEntries() {
-      const list = document.getElementById('logList');
+    function updateTimerDisplay() {
+      const hrs = Math.floor(fastSeconds / 3600).toString().padStart(2, '0');
+      const mins = Math.floor((fastSeconds % 3600) / 60).toString().padStart(2, '0');
+      const secs = (fastSeconds % 60).toString().padStart(2, '0');
+      document.getElementById('timerDisplay').innerText = `${hrs}:${mins}:${secs}`;
+    }
+
+    // LocalStorage Macro Tracker
+    let foodLog = JSON.parse(localStorage.getItem('nutriPulseLog')) || [];
+
+    function renderFoodLog() {
+      const list = document.getElementById('foodList');
       list.innerHTML = '';
-      state.entries.forEach(e => {
+      let total = 0;
+
+      foodLog.forEach((item, index) => {
+        total += item.cals;
         const li = document.createElement('li');
-        li.className = 'log-item';
         li.innerHTML = `
-          <span><strong>${e.name}</strong> - ${e.cal} kcal (${e.p}g P | ${e.c}g C | ${e.f}g F)</span>
-          <button class="delete-btn" onclick="deleteEntry(${e.id})">&times;</button>
+          <span><strong>${item.name}</strong> - ${item.cals} kcal</span>
+          <button class="delete-btn" onclick="deleteFood(${index})">&times;</button>
         `;
         list.appendChild(li);
       });
+
+      document.getElementById('totalCals').innerText = total;
     }
 
-    function saveState() {
-      localStorage.setItem('nutripulse_state', JSON.stringify(state));
+    function addFoodItem() {
+      const name = document.getElementById('foodName').value;
+      const cals = parseInt(document.getElementById('foodCals').value);
+
+      if(!name || isNaN(cals)) return;
+
+      foodLog.push({ name, cals });
+      localStorage.setItem('nutriPulseLog', JSON.stringify(foodLog));
+      document.getElementById('foodName').value = '';
+      document.getElementById('foodCals').value = '';
+      renderFoodLog();
     }
 
-    // Persistent Fasting Timer Logic
-    let timerInterval = null;
-
-    function startFastingTimer() {
-      let startTime = localStorage.getItem('fasting_start_time');
-      if (!startTime) {
-        startTime = Date.now();
-        localStorage.setItem('fasting_start_time', startTime);
-      }
-      runFastingTimer();
+    function deleteFood(index) {
+      foodLog.splice(index, 1);
+      localStorage.setItem('nutriPulseLog', JSON.stringify(foodLog));
+      renderFoodLog();
     }
 
-    function runFastingTimer() {
-      if (timerInterval) clearInterval(timerInterval);
-      
-      document.getElementById('fastingStatus').innerText = "Status: Fasting in Progress 🔥";
-      document.getElementById('fastingStatus').style.color = "#10b981";
-
-      timerInterval = setInterval(() => {
-        const startTime = parseInt(localStorage.getItem('fasting_start_time'));
-        if (!startTime) return resetFastingTimer();
-
-        const elapsedSeconds = Math.floor((Date.now() - startTime) / 1000);
-        const totalFastingSeconds = 16 * 3600;
-        const remainingSeconds = totalFastingSeconds - elapsedSeconds;
-
-        if (remainingSeconds <= 0) {
-          clearInterval(timerInterval);
-          document.getElementById('fastingTimerDisplay').innerText = "00:00:00";
-          document.getElementById('fastingStatus').innerText = "Status: Fast Complete! 🎉";
-          return;
-        }
-
-        const hrs = Math.floor(remainingSeconds / 3600).toString().padStart(2, '0');
-        const mins = Math.floor((remainingSeconds % 3600) / 60).toString().padStart(2, '0');
-        const secs = (remainingSeconds % 60).toString().padStart(2, '0');
-        document.getElementById('fastingTimerDisplay').innerText = `${hrs}:${mins}:${secs}`;
-      }, 1000);
-    }
-
-    function resetFastingTimer() {
-      clearInterval(timerInterval);
-      timerInterval = null;
-      localStorage.removeItem('fasting_start_time');
-      document.getElementById('fastingTimerDisplay').innerText = "16:00:00";
-      document.getElementById('fastingStatus').innerText = "Status: Not Started";
-      document.getElementById('fastingStatus').style.color = "var(--text-muted)";
-    }
-
-    // Daily Habit Storage
-    function saveHabits() {
-      const habits = {
-        h1: document.getElementById('habit1').checked,
-        h2: document.getElementById('habit2').checked,
-        h3: document.getElementById('habit3').checked,
-        h4: document.getElementById('habit4').checked
-      };
-      localStorage.setItem('nutripulse_habits', JSON.stringify(habits));
-    }
-
-    // Interactive Recipe & Workout Filters
-    function filterRecipes() {
-      const goal = document.getElementById('recipeFilter').value;
-      const display = document.getElementById('recipeDisplay');
-
-      if (goal === 'fat_loss') {
-        display.innerHTML = `
-          <p><strong>🥗 Lemon Herb Grilled Chicken Bowl</strong></p>
-          <p style="color: #38bdf8;">• 340 kcal | 42g Protein | 15g Carbs | 8g Fat</p>
-          <p style="color: var(--text-muted); margin-top: 4px;">150g grilled chicken breast served over leafy greens, cherry tomatoes, and 1 tsp olive oil lemon dressing.</p>
-          <br>
-          <p><strong>🥣 High-Protein Berry Greek Yogurt Parfait</strong></p>
-          <p style="color: #38bdf8;">• 230 kcal | 22g Protein | 28g Carbs | 2g Fat</p>
-          <p style="color: var(--text-muted); margin-top: 4px;">170g non-fat Greek yogurt layered with mixed berries and 1 scoop vanilla protein powder.</p>
-        `;
-      } else {
-        display.innerHTML = `
-          <p><strong>🍌 High-Calorie PB Banana Protein Shake</strong></p>
-          <p style="color: #38bdf8;">• 620 kcal | 30g Protein | 75g Carbs | 22g Fat</p>
-          <p style="color: var(--text-muted); margin-top: 4px;">Blend 300ml whole milk + 1 whole banana + 2 tbsp peanut butter + 50g rolled oats.</p>
-          <br>
-          <p><strong>🥑 Avocado, Egg & Turkey Wrap</strong></p>
-          <p style="color: #38bdf8;">• 520 kcal | 32g Protein | 42g Carbs | 24g Fat</p>
-          <p style="color: var(--text-muted); margin-top: 4px;">Whole wheat tortilla filled with 2 scrambled eggs, sliced turkey breast, and half an avocado.</p>
-        `;
-      }
-    }
-
-    function filterWorkouts() {
-      const area = document.getElementById('exerciseFilter').value;
-      const display = document.getElementById('exerciseDisplay');
-
-      if (area === 'core') {
-        display.innerHTML = `
-          <p><strong>🔥 Core & Belly Tone Focus:</strong></p>
-          <p style="color: var(--text-muted); margin-top: 4px;">1. Plank Holds (3 sets x 45s)<br>2. Bicycle Crunches (3 sets x 20 reps)<br>3. Lying Leg Raises (3 sets x 15 reps)</p>
-        `;
-      } else if (area === 'neck') {
-        display.innerHTML = `
-          <p><strong>🧘 Neck & Posture Realignment:</strong></p>
-          <p style="color: var(--text-muted); margin-top: 4px;">1. Chin Tucks (3 sets x 12 reps)<br>2. Neck Isometric Holds (10s hold each direction)<br>3. Upper Trap Stretches to reduce neck strain.</p>
-        `;
-      } else {
-        display.innerHTML = `
-          <p><strong>🏃 Full Body Fat Burn Routine:</strong></p>
-          <p style="color: var(--text-muted); margin-top: 4px;">1. 8,000 to 10,000 Daily Steps<br>2. Bodyweight Squats (3 sets x 15 reps)<br>3. Push-ups or Knee Push-ups (3 sets x 10 reps)</p>
-        `;
-      }
-    }
-
-    function copyDailySummary() {
-      const text = `📊 NutriPulse Pro Daily Report:\n• Calories: ${state.logged.calories} / ${state.targets.calories} kcal\n• Protein: ${state.logged.protein}g / ${state.targets.protein}g\n• Water: ${state.logged.water} / 2500 ml\nTracked privately with NutriPulse Pro!`;
-      navigator.clipboard.writeText(text);
-      alert("Daily summary copied to clipboard!");
-    }
-
-    // Modal Helpers
-    function openModal(id) {
-      document.getElementById(id).style.display = 'flex';
-    }
-
-    function closeModal(id) {
-      document.getElementById(id).style.display = 'none';
-    }
-
-    // Startup Initialization
-    window.addEventListener('load', () => {
-      const savedState = localStorage.getItem('nutripulse_state');
-      if (savedState) {
-        state = JSON.parse(savedState);
-      }
-
-      checkMidnightReset();
-
-      const savedHabits = localStorage.getItem('nutripulse_habits');
-      if (savedHabits) {
-        const habits = JSON.parse(savedHabits);
-        document.getElementById('habit1').checked = habits.h1 || false;
-        document.getElementById('habit2').checked = habits.h2 || false;
-        document.getElementById('habit3').checked = habits.h3 || false;
-        document.getElementById('habit4').checked = habits.h4 || false;
-      }
-
-      if (localStorage.getItem('fasting_start_time')) {
-        runFastingTimer();
-      }
-
-      updateUI();
-    });
+    // Initial load
+    renderFoodLog();
   </script>
 </body>
 </html>
