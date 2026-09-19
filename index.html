@@ -58,9 +58,9 @@
     header h1 { background: linear-gradient(135deg, #34d399, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.7rem; font-weight: 800; letter-spacing: -0.5px; }
     header p { color: var(--text-muted); font-size: 0.82rem; margin-top: 0.1rem; }
 
-    nav { display: flex; justify-content: center; gap: 0.3rem; background: rgba(15, 23, 42, 0.9); padding: 0.6rem; border-bottom: 1px solid var(--card-border); overflow-x: auto; white-space: nowrap; }
-    nav::-webkit-scrollbar { display: none; }
-    nav button { background: transparent; border: none; color: var(--text-muted); padding: 0.5rem 0.9rem; font-weight: 600; cursor: pointer; border-radius: 8px; transition: all 0.25s ease; font-size: 0.8rem; }
+    /* Clean mobile-friendly wrapping navigation bar */
+    nav { display: flex; justify-content: center; gap: 0.3rem; background: rgba(15, 23, 42, 0.9); padding: 0.6rem 1rem; border-bottom: 1px solid var(--card-border); flex-wrap: wrap; }
+    nav button { background: transparent; border: none; color: var(--text-muted); padding: 0.4rem 0.7rem; font-weight: 600; cursor: pointer; border-radius: 8px; transition: all 0.25s ease; font-size: 0.78rem; }
     nav button.active, nav button:hover { background: rgba(16, 185, 129, 0.15); color: var(--accent); border: 1px solid rgba(16, 185, 129, 0.3); }
 
     main { max-width: 800px; margin: 1.5rem auto; padding: 0 1rem; }
@@ -83,7 +83,6 @@
     .result-box { background: rgba(15, 23, 42, 0.6); padding: 1.2rem; border-radius: 12px; margin-top: 1rem; text-align: center; border: 1px solid var(--card-border); }
     .result-box h3 { color: var(--accent); font-size: 1.6rem; font-weight: 800; }
 
-    /* Nutrition Breakdown Display */
     .nutri-card { background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 1.2rem; margin-top: 1rem; }
     .nutri-badge { display: inline-block; padding: 0.25rem 0.6rem; border-radius: 6px; font-weight: 700; font-size: 0.75rem; margin-bottom: 0.6rem; background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
 
@@ -92,20 +91,16 @@
     .nutri-item span { font-size: 0.65rem; color: var(--text-muted); display: block; text-transform: uppercase; }
     .nutri-item strong { font-size: 0.9rem; color: white; }
 
-    /* Progress Bar */
     .progress-container { background: rgba(15, 23, 42, 0.6); border-radius: 8px; height: 10px; width: 100%; overflow: hidden; margin-top: 0.8rem; border: 1px solid var(--card-border); }
     .progress-bar { background: var(--accent-grad); height: 100%; width: 0%; transition: width 0.4s ease; }
 
-    /* Fasting Timer */
     .timer-display { font-size: 3rem; font-weight: 800; text-align: center; margin: 1.5rem 0; color: var(--accent); text-shadow: 0 0 20px rgba(16, 185, 129, 0.2); }
     .timer-controls { display: flex; gap: 1rem; }
 
-    /* Water Tracker Styles */
     .water-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem; margin: 1rem 0; }
     .glass-btn { background: rgba(15, 23, 42, 0.6); border: 2px solid var(--water-color); color: var(--water-color); padding: 0.8rem 0.4rem; border-radius: 10px; font-weight: 700; cursor: pointer; text-align: center; transition: all 0.2s ease; font-size: 0.85rem; }
     .glass-btn.filled { background: var(--water-color); color: white; box-shadow: 0 0 15px rgba(59, 130, 246, 0.4); }
 
-    /* Loggers & Lists */
     ul { list-style: none; }
     li { background: rgba(15, 23, 42, 0.5); padding: 0.8rem 1rem; border-radius: 10px; margin-bottom: 0.6rem; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--card-border); }
     .delete-btn { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); padding: 0.3rem 0.6rem; border-radius: 6px; cursor: pointer; font-size: 0.8rem; transition: background 0.2s; }
@@ -116,7 +111,6 @@
     .macro-card span { font-size: 0.7rem; color: var(--text-muted); display: block; text-transform: uppercase; }
     .macro-card strong { color: var(--accent); font-size: 1.15rem; font-weight: 700; }
 
-    /* Footer & Modals */
     footer { text-align: center; padding: 2rem; border-top: 1px solid var(--card-border); color: var(--text-muted); font-size: 0.8rem; margin-top: 3rem; background: rgba(15, 23, 42, 0.5); }
     footer a { color: var(--accent); text-decoration: none; margin: 0 0.5rem; cursor: pointer; }
     footer a:hover { text-decoration: underline; }
@@ -411,7 +405,7 @@
               <strong>2. Arm Circles & Squeezes</strong>
               <span style="font-size: 0.8rem; color: var(--text-muted);">3 Sets x 30 Seconds</span>
             </li>
-            <li style="font-size: 0.8rem; color: var(--text-muted);">
+            <li style="flex-direction: column; align-items: flex-start; gap: 0.15rem;">
               <strong>3. Wall Push-Ups</strong>
               <span style="font-size: 0.8rem; color: var(--text-muted);">3 Sets x 15 Reps</span>
             </li>
@@ -661,7 +655,6 @@
       document.getElementById('totalCarbs').innerText = Math.round(totalCarb * 10) / 10;
       document.getElementById('totalFat').innerText = Math.round(totalF * 10) / 10;
 
-      // Update progress bar
       const percent = Math.min(100, Math.round((totalC / currentTargetCalories) * 100));
       document.getElementById('calorieProgressBar').style.width = percent + '%';
       document.getElementById('progressText').innerText = `${totalC} / ${currentTargetCalories} kcal`;
