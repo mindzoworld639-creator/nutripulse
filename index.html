@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -6,7 +6,7 @@
   <title>NutriPulse Pro | Complete Calorie Counter, Macro Database & Fitness Suite</title>
 
   <!-- SEO Meta Tags -->
-  <meta name="description" content="NutriPulse Pro is a 100% free, privacy-first fitness web app. Search food nutrition charts with portion sizes, track calories & macros, log water intake, manage 16:8 intermittent fasting, and access targeted workout routines without creating an account.">
+  <meta name="description" content="NutriPulse Pro is a 100% free, privacy-first fitness web app. Search food nutrition charts with custom portion sizes, track calories & macros, log water intake, manage 16:8 intermittent fasting, and access targeted workout routines without creating an account.">
   <meta name="keywords" content="NutriPulse, calorie counter, macro tracker, food nutrition database, portion sizes, water tracker, fasting timer, recipes, workout guide, free fitness app, privacy calorie tracker">
   <meta name="robots" content="index, follow">
 
@@ -18,7 +18,7 @@
 
   <!-- Open Graph / Social Sharing -->
   <meta property="og:title" content="NutriPulse Pro - Free & Private Fitness Suite">
-  <meta property="og:description" content="Track your calories, macros, water intake, and fasting progress locally in your browser. Complete food nutrition search with portion sizing. No sign-ups required.">
+  <meta property="og:description" content="Track your calories, macros, water intake, and fasting progress locally in your browser. Complete food nutrition search with precise Indian portion sizing. No sign-ups required.">
   <meta property="og:type" content="website">
 
   <!-- Structured Data (JSON-LD) -->
@@ -83,7 +83,6 @@
     .nutri-card { background: #0f172a; border: 1px solid var(--border-color); border-radius: 10px; padding: 1rem; margin-top: 1rem; }
     .nutri-badge { display: inline-block; padding: 0.3rem 0.6rem; border-radius: 4px; font-weight: 700; font-size: 0.8rem; margin-bottom: 0.8rem; }
     .badge-good { background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid #10b981; }
-    .badge-warn { background: rgba(245, 158, 11, 0.2); color: #f59e0b; border: 1px solid #f59e0b; }
 
     .nutri-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; margin: 0.8rem 0; text-align: center; }
     .nutri-item { background: var(--card-bg); padding: 0.5rem; border-radius: 6px; border: 1px solid var(--border-color); }
@@ -194,35 +193,36 @@
       </div>
     </section>
 
-    <!-- Complete Food & Macro Database -->
+    <!-- Complete Food & Macro Database with Precise Portion Sizing -->
     <section id="tracker" class="tab-content">
       <div class="card">
-        <h2>Live Global Food Database & Macro Tracker</h2>
-        <p style="font-size:0.8rem; color: var(--text-muted); margin-bottom:1rem;">Search any food item (e.g., Daal Chawal, Roti, Paneer, Oats, Chicken) to view full calories, macros, portion sizes, and health impact.</p>
+        <h2>Indian & Global Food Database & Macro Tracker</h2>
+        <p style="font-size:0.8rem; color: var(--text-muted); margin-bottom:1rem;">Search foods like <strong>dal</strong>, <strong>rice</strong>, <strong>roti</strong>, <strong>paneer</strong>, or type your custom meal manually below with exact quantities.</p>
         
         <div class="form-group">
           <label>Search Food Database</label>
           <div style="display:flex; gap:0.5rem;">
-            <input type="text" id="foodSearchInput" placeholder="Type food name (e.g., Daal Chawal)">
+            <input type="text" id="foodSearchInput" placeholder="Type food (e.g., Dal, Roti, Rice)">
             <button class="btn" style="width: auto; white-space: nowrap; background:#3b82f6;" onclick="searchFoodDatabase()">Search</button>
           </div>
           <div id="searchResults" class="search-results-list" style="display:none;"></div>
         </div>
 
-        <!-- Selected Food Detailed Nutrition Card -->
+        <!-- Selected Food Detailed Nutrition Card with Portion Multiplier -->
         <div id="activeNutriCard" class="nutri-card" style="display:none;">
           <span id="nutriBadge" class="nutri-badge badge-good">High Quality</span>
           <h3 id="nutriFoodTitle" style="color:var(--accent);">Food Name</h3>
-          <p id="portionDescText" style="font-size:0.85rem; color:#3b82f6; font-weight:600; margin-top:0.2rem;">Serving Size: 1 Medium Bowl (~250g)</p>
+          <p id="portionDescText" style="font-size:0.85rem; color:#3b82f6; font-weight:600; margin-top:0.2rem;">Serving Size: 1 Bowl (~150g)</p>
 
           <div class="form-group" style="margin-top:0.8rem; margin-bottom:0.8rem;">
-            <label style="color:var(--accent); font-weight:600;">Select Number of Servings / Quantity</label>
+            <label style="color:var(--accent); font-weight:600;">Select Portion Quantity / Count</label>
             <select id="portionMultiplier" onchange="updatePortionScaling()">
-              <option value="0.5">0.5 Serving (Half Portion)</option>
-              <option value="1" selected>1 Serving (Standard Portion)</option>
-              <option value="1.5">1.5 Servings</option>
-              <option value="2">2 Servings (Double Portion)</option>
-              <option value="3">3 Servings</option>
+              <option value="0.5">0.5 Portion (Half)</option>
+              <option value="1" selected>1 Standard Portion / Piece / Bowl</option>
+              <option value="1.5">1.5 Portions</option>
+              <option value="2">2 Portions / Pieces / Bowls</option>
+              <option value="3">3 Portions / Pieces / Bowls</option>
+              <option value="4">4 Portions (e.g., 4 Chapatis)</option>
             </select>
           </div>
 
@@ -243,17 +243,19 @@
           <button class="btn" style="margin-top:0.5rem;" onclick="logActiveFood()">+ Add To Today's Meal Log</button>
         </div>
 
-        <!-- Manual Quick Add Override Option -->
+        <!-- Manual Typing / Custom Entry Option -->
         <div style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-color);">
-          <h3 style="font-size:1rem; color:var(--text-muted); margin-bottom:0.5rem;">Manual Entry (Optional Override)</h3>
-          <div style="display:grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap:0.4rem;">
-            <input type="text" id="manualName" placeholder="Meal Name" style="padding:0.4rem; background:#0f172a; border:1px solid var(--border-color); color:white; border-radius:4px;">
-            <input type="number" id="manualCals" placeholder="kcal" style="padding:0.4rem; background:#0f172a; border:1px solid var(--border-color); color:white; border-radius:4px;">
-            <input type="number" id="manualProtein" placeholder="Prot(g)" style="padding:0.4rem; background:#0f172a; border:1px solid var(--border-color); color:white; border-radius:4px;">
-            <input type="number" id="manualCarbs" placeholder="Carb(g)" style="padding:0.4rem; background:#0f172a; border:1px solid var(--border-color); color:white; border-radius:4px;">
-            <input type="number" id="manualFat" placeholder="Fat(g)" style="padding:0.4rem; background:#0f172a; border:1px solid var(--border-color); color:white; border-radius:4px;">
+          <h3 style="font-size:1rem; color:var(--text-muted); margin-bottom:0.5rem;">Manual Entry (Type Any Meal & Macros)</h3>
+          <div class="form-group">
+            <input type="text" id="manualName" placeholder="Meal Name (e.g. 2 Chapatis & Dal)" style="margin-bottom:0.5rem;">
+            <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:0.4rem;">
+              <input type="number" id="manualCals" placeholder="kcal">
+              <input type="number" id="manualProtein" placeholder="Prot(g)">
+              <input type="number" id="manualCarbs" placeholder="Carb(g)">
+              <input type="number" id="manualFat" placeholder="Fat(g)">
+            </div>
           </div>
-          <button class="btn" style="margin-top:0.5rem; background:var(--card-bg); border:1px solid var(--accent); color:var(--accent);" onclick="addManualFood()">Quick Add Manual Meal</button>
+          <button class="btn" style="background:var(--card-bg); border:1px solid var(--accent); color:var(--accent);" onclick="addManualFood()">Quick Add Manual Meal</button>
         </div>
 
         <!-- Daily Logged Meals Summary -->
@@ -485,20 +487,18 @@
       document.getElementById('tdeeResult').style.display = 'block';
     }
 
-    // Offline + Online Food Database Integration with Specific Portion Sizes
+    // Comprehensive Indian & Global Food Database with Separate Portion Sizes
     const fallbackDB = {
-      "daal chawal": { name: "Daal Chawal", servingDesc: "1 Medium Bowl (~250g)", cals: 350, protein: 12, carbs: 62, fat: 6, fiber: 7, sugar: 2, sodium: 320, vitamins: "Vit B, Iron", badge: "badge-good", ratingText: "Balanced Meal - High Fiber & Protein" },
-      "dal chawal": { name: "Daal Chawal", servingDesc: "1 Medium Bowl (~250g)", cals: 350, protein: 12, carbs: 62, fat: 6, fiber: 7, sugar: 2, sodium: 320, vitamins: "Vit B, Iron", badge: "badge-good", ratingText: "Balanced Meal - High Fiber & Protein" },
-      "roti": { name: "Whole Wheat Roti", servingDesc: "1 Piece (~35g)", cals: 100, protein: 3, carbs: 20, fat: 1, fiber: 3, sugar: 0, sodium: 5, vitamins: "B-Complex", badge: "badge-good", ratingText: "Good Fiber Carbs" },
-      "chapati": { name: "Whole Wheat Chapati", servingDesc: "1 Piece (~35g)", cals: 100, protein: 3, carbs: 20, fat: 1, fiber: 3, sugar: 0, sodium: 5, vitamins: "B-Complex", badge: "badge-good", ratingText: "Good Fiber Carbs" },
-      "paneer": { name: "Fresh Paneer", servingDesc: "100g Serving", cals: 265, protein: 18, carbs: 6, fat: 20, fiber: 0, sugar: 2, sodium: 180, vitamins: "Calcium, Vit D", badge: "badge-good", ratingText: "High Protein & Healthy Fats" },
-      "egg": { name: "Whole Egg (Boiled)", servingDesc: "1 Large Egg (~50g)", cals: 75, protein: 6, carbs: 0.5, fat: 5, fiber: 0, sugar: 0, sodium: 62, vitamins: "Vit B12, Choline", badge: "badge-good", ratingText: "High Quality Protein" },
-      "eggs": { name: "2 Boiled Eggs", servingDesc: "2 Large Eggs (~100g)", cals: 150, protein: 12, carbs: 1, fat: 10, fiber: 0, sugar: 0, sodium: 124, vitamins: "Vit B12, Choline", badge: "badge-good", ratingText: "High Quality Protein" },
-      "chicken breast": { name: "Grilled Chicken Breast", servingDesc: "100g Cooked Serving", cals: 165, protein: 31, carbs: 0, fat: 3.6, fiber: 0, sugar: 0, sodium: 74, vitamins: "Niacin, Selenium", badge: "badge-good", ratingText: "Lean High Protein" },
-      "rice": { name: "Steamed White Rice", servingDesc: "1 Bowl Cooked (~150g)", cals: 130, protein: 2.7, carbs: 28, fat: 0.3, fiber: 0.4, sugar: 0, sodium: 1, vitamins: "Folate, B1", badge: "badge-good", ratingText: "Energy Carbs" },
-      "oatmeal": { name: "Rolled Oatmeal", servingDesc: "1 Bowl Prepared (~200g)", cals: 150, protein: 5, carbs: 27, fat: 2.5, fiber: 4, sugar: 1, sodium: 2, vitamins: "Manganese, Fiber", badge: "badge-good", ratingText: "High Fiber & Heart Healthy" },
-      "milk": { name: "Whole Milk", servingDesc: "1 Glass (~240ml)", cals: 120, protein: 6, carbs: 9, fat: 6, fiber: 0, sugar: 9, sodium: 105, vitamins: "Calcium, Vit D", badge: "badge-good", ratingText: "Calcium & Protein Rich" },
-      "apple": { name: "Fresh Apple", servingDesc: "1 Medium Apple (~180g)", cals: 95, protein: 0.5, carbs: 25, fat: 0.3, fiber: 4.4, sugar: 19, sodium: 2, vitamins: "Vit C, Antioxidants", badge: "badge-good", ratingText: "Healthy High Fiber Snack" }
+      "dal": { name: "Cooked Yellow Dal", servingDesc: "1 Bowl (~150g)", cals: 120, protein: 7, carbs: 18, fat: 2.5, fiber: 4, sugar: 1, sodium: 200, vitamins: "Iron, Folate", badge: "badge-good", ratingText: "High Protein Plant Source" },
+      "daal": { name: "Cooked Yellow Dal", servingDesc: "1 Bowl (~150g)", cals: 120, protein: 7, carbs: 18, fat: 2.5, fiber: 4, sugar: 1, sodium: 200, vitamins: "Iron, Folate", badge: "badge-good", ratingText: "High Protein Plant Source" },
+      "rice": { name: "Steamed Basmati Rice", servingDesc: "1 Plate / Bowl (~150g)", cals: 195, protein: 4, carbs: 42, fat: 0.5, fiber: 0.6, sugar: 0, sodium: 2, vitamins: "B-Vitamins", badge: "badge-good", ratingText: "Clean Energy Carbs" },
+      "roti": { name: "Whole Wheat Roti / Chapati", servingDesc: "1 Piece (~35g)", cals: 100, protein: 3, carbs: 20, fat: 1, fiber: 3, sugar: 0, sodium: 5, vitamins: "B-Complex, Iron", badge: "badge-good", ratingText: "Healthy Fiber Carbs" },
+      "chapati": { name: "Whole Wheat Roti / Chapati", servingDesc: "1 Piece (~35g)", cals: 100, protein: 3, carbs: 20, fat: 1, fiber: 3, sugar: 0, sodium: 5, vitamins: "B-Complex, Iron", badge: "badge-good", ratingText: "Healthy Fiber Carbs" },
+      "paneer": { name: "Fresh Paneer", servingDesc: "100g Serving", cals: 265, protein: 18, carbs: 6, fat: 20, fiber: 0, sugar: 2, sodium: 180, vitamins: "Calcium, Vit D", badge: "badge-good", ratingText: "High Protein & Fats" },
+      "egg": { name: "Boiled Whole Egg", servingDesc: "1 Large Egg (~50g)", cals: 75, protein: 6, carbs: 0.5, fat: 5, fiber: 0, sugar: 0, sodium: 62, vitamins: "Vit B12, Choline", badge: "badge-good", ratingText: "Complete High Quality Protein" },
+      "chicken": { name: "Grilled Chicken Breast", servingDesc: "100g Cooked Serving", cals: 165, protein: 31, carbs: 0, fat: 3.6, fiber: 0, sugar: 0, sodium: 74, vitamins: "Niacin, Selenium", badge: "badge-good", ratingText: "Lean Muscle Protein" },
+      "oats": { name: "Prepared Oatmeal", servingDesc: "1 Bowl (~200g)", cals: 150, protein: 5, carbs: 27, fat: 2.5, fiber: 4, sugar: 1, sodium: 2, vitamins: "Manganese, Fiber", badge: "badge-good", ratingText: "Heart Healthy Fiber" },
+      "milk": { name: "Whole Milk", servingDesc: "1 Glass (~240ml)", cals: 120, protein: 6, carbs: 9, fat: 6, fiber: 0, sugar: 9, sodium: 105, vitamins: "Calcium, Vit D", badge: "badge-good", ratingText: "Calcium & Protein Rich" }
     };
 
     let activeSelectedFood = null;
@@ -510,16 +510,13 @@
 
       if(!query) return;
 
-      // Reset multiplier to 1
       document.getElementById('portionMultiplier').value = "1";
 
-      // Check offline Indian staple database first
       if(fallbackDB[query]) {
         renderSelectedNutriCard(fallbackDB[query]);
         return;
       }
 
-      // Query Open Food Facts API
       try {
         const response = await fetch(`https://world.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(query)}&search_simple=1&action=process&json=1&page_size=5`);
         const data = await response.json();
@@ -543,8 +540,8 @@
                 sugar: Math.round(nutriments.sugars_100g || 1),
                 sodium: Math.round(nutriments.sodium_100g * 1000 || 50),
                 vitamins: nutriments['vitamin-c_100g'] ? "Vit C Rich" : "Vit B & Minerals",
-                badge: (nutriments.sugars_100g > 15) ? "badge-warn" : "badge-good",
-                ratingText: (nutriments.sugars_100g > 15) ? "Moderate Sugar - Limit Portion" : "Nutritious Choice"
+                badge: "badge-good",
+                ratingText: "Nutritious Food Item"
               };
               resultsContainer.style.display = 'none';
               renderSelectedNutriCard(foodObj);
@@ -552,10 +549,10 @@
             resultsContainer.appendChild(div);
           });
         } else {
-          alert("No exact live match found. Use the Quick Add manual form below to log custom values!");
+          alert("No exact item found. Use the manual entry form below to type any custom meal and macros!");
         }
       } catch (err) {
-        alert("Unable to reach live server. You can still use manual entry below!");
+        alert("Search error. You can use manual entry below!");
       }
     }
 
@@ -565,7 +562,6 @@
       document.getElementById('nutriFoodTitle').innerText = food.name;
       document.getElementById('portionDescText').innerText = `Base Serving Size: ${food.servingDesc}`;
       document.getElementById('nutriBadge').innerText = food.ratingText;
-      document.getElementById('nutriBadge').className = `nutri-badge ${food.badge}`;
       
       updatePortionScaling();
       document.getElementById('activeNutriCard').style.display = 'block';
@@ -609,7 +605,7 @@
       const fat = parseInt(document.getElementById('manualFat').value) || 0;
 
       if(!name || isNaN(cals)) {
-        alert("Please enter a food name and calories!");
+        alert("Please enter a meal name and calories!");
         return;
       }
 
@@ -749,3 +745,4 @@
   </script>
 </body>
 </html>
+  
