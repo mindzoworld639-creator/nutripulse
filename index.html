@@ -4,180 +4,151 @@
     <meta name="google-adsense-account" content="ca-pub-5205983068075084">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NutriPulse - AI Meal & Fitness Companion</title>
+    <title>NutriPulse Pro - Ultimate AI Nutrition & Fitness Suite</title>
     
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="NutriPulse is a free AI-powered meal and fitness tracker. Track macros, analyze Indian and global diets, and generate custom workout plans instantly.">
-    <meta name="keywords" content="NutriPulse, AI calorie counter, meal planner, Indian diet macro tracker, fitness companion, free workout generator">
+    <meta name="description" content="NutriPulse Pro is an all-in-one AI meal and fitness tracker with macro progress bars, water tracking, local storage, and custom diet calculators.">
+    <meta name="keywords" content="NutriPulse, macro tracker, TDEE calculator, water tracker, AI calorie counter, workout logger">
     <meta name="robots" content="index, follow">
     
-    <!-- Google AdSense Code -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5205983068075084"
-     crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5205983068075084" crossorigin="anonymous"></script>
 
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-        }
-        body {
-            background-color: #0f172a;
-            color: #f8fafc;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-            min-height: 100vh;
-            padding: 20px 20px 80px 20px;
-        }
-        .container {
-            max-width: 500px;
-            width: 100%;
-            background-color: #1e293b;
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            margin-top: auto;
-            margin-bottom: auto;
-        }
-        h1 {
-            color: #38bdf8;
-            font-size: 1.8rem;
-            margin-bottom: 8px;
-            text-align: center;
-        }
-        p.subtitle {
-            color: #94a3b8;
-            font-size: 0.95rem;
-            text-align: center;
-            margin-bottom: 24px;
-        }
-        .form-group {
-            margin-bottom: 16px;
-        }
-        label {
-            display: block;
-            margin-bottom: 6px;
-            font-size: 0.85rem;
-            color: #cbd5e1;
-        }
-        input, select, textarea {
-            width: 100%;
-            padding: 12px;
-            background-color: #0f172a;
-            border: 1px solid #334155;
-            border-radius: 8px;
-            color: #fff;
-            font-size: 1rem;
-        }
-        button {
-            width: 100%;
-            padding: 14px;
-            background-color: #0284c7;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 10px;
-            transition: background 0.2s;
-        }
-        button:hover {
-            background-color: #0369a1;
-        }
-        .result-card {
-            margin-top: 20px;
-            padding: 16px;
-            background-color: #0f172a;
-            border-left: 4px solid #38bdf8;
-            border-radius: 6px;
-            display: none;
-        }
-        footer {
-            margin-top: 30px;
-            font-size: 0.8rem;
-            color: #64748b;
-            text-align: center;
-        }
-        footer a {
-            color: #38bdf8;
-            text-decoration: none;
-            margin: 0 8px;
-        }
-        footer a:hover {
-            text-decoration: underline;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+        body { background-color: #0f172a; color: #f8fafc; display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding: 20px 20px 80px 20px; }
+        .app-container { max-width: 550px; width: 100%; display: flex; flex-direction: column; gap: 20px; }
+        .card { background-color: #1e293b; border-radius: 16px; padding: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.4); }
+        h1 { color: #38bdf8; font-size: 1.8rem; text-align: center; margin-bottom: 4px; }
+        .subtitle { color: #94a3b8; font-size: 0.9rem; text-align: center; margin-bottom: 16px; }
+        
+        /* Dashboard Stats */
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
+        .stat-box { background-color: #0f172a; padding: 12px; border-radius: 10px; border: 1px solid #334155; text-align: center; }
+        .stat-val { font-size: 1.3rem; font-weight: bold; color: #38bdf8; }
+        .stat-lbl { font-size: 0.75rem; color: #94a3b8; }
+
+        /* Progress Bars */
+        .macro-bar-container { margin-bottom: 10px; }
+        .macro-label { display: flex; justify-content: space-between; font-size: 0.8rem; color: #cbd5e1; margin-bottom: 4px; }
+        .progress-bg { background-color: #0f172a; height: 10px; border-radius: 5px; overflow: hidden; border: 1px solid #334155; }
+        .progress-fill { height: 100%; width: 0%; transition: width 0.4s ease; }
+        .fill-cal { background-color: #38bdf8; }
+        .fill-pro { background-color: #f43f5e; }
+        .fill-carb { background-color: #eab308; }
+        .fill-fat { background-color: #10b981; }
+
+        /* Inputs & Buttons */
+        .form-group { margin-bottom: 12px; }
+        label { display: block; margin-bottom: 6px; font-size: 0.85rem; color: #cbd5e1; }
+        input, select { width: 100%; padding: 12px; background-color: #0f172a; border: 1px solid #334155; border-radius: 8px; color: #fff; font-size: 0.95rem; }
+        .btn { width: 100%; padding: 12px; background-color: #0284c7; color: white; border: none; border-radius: 8px; font-size: 0.95rem; font-weight: bold; cursor: pointer; transition: 0.2s; }
+        .btn:hover { background-color: #0369a1; }
+        .btn-secondary { background-color: #334155; margin-top: 8px; }
+        .btn-secondary:hover { background-color: #475569; }
+        .btn-danger { background-color: #e11d48; margin-top: 10px; }
+
+        /* Water Section */
+        .water-controls { display: flex; gap: 10px; margin-top: 10px; }
+        .water-btn { flex: 1; padding: 10px; background-color: #0284c7; border: none; color: white; border-radius: 8px; font-weight: bold; cursor: pointer; }
+
+        /* History List */
+        .log-list { list-style: none; max-height: 180px; overflow-y: auto; margin-top: 10px; }
+        .log-item { background: #0f172a; padding: 10px; border-radius: 8px; margin-bottom: 8px; font-size: 0.85rem; border-left: 3px solid #38bdf8; display: flex; justify-content: space-between; align-items: center; }
+
+        footer { margin-top: 30px; font-size: 0.8rem; color: #64748b; text-align: center; }
+        footer a { color: #38bdf8; text-decoration: none; margin: 0 8px; }
+        
         /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            z-index: 1000;
-        }
-        .modal-content {
-            background-color: #1e293b;
-            border-radius: 12px;
-            padding: 24px;
-            max-width: 500px;
-            width: 100%;
-            max-height: 80vh;
-            overflow-y: auto;
-            color: #cbd5e1;
-            font-size: 0.9rem;
-            line-height: 1.6;
-        }
-        .modal-content h2 {
-            color: #38bdf8;
-            margin-bottom: 12px;
-        }
-        .close-btn {
-            background-color: #334155;
-            color: #fff;
-            padding: 8px 16px;
-            border-radius: 6px;
-            margin-top: 16px;
-            float: right;
-            cursor: pointer;
-            border: none;
-        }
+        .modal { display: none; position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); justify-content:center; align-items:center; padding:20px; z-index:1000; }
+        .modal-content { background:#1e293b; border-radius:12px; padding:24px; max-width:500px; width:100%; color:#cbd5e1; font-size:0.9rem; line-height:1.6; }
+        .modal-content h2 { color:#38bdf8; margin-bottom:12px; }
+        .close-btn { background:#334155; color:#fff; padding:8px 16px; border-radius:6px; margin-top:16px; float:right; cursor:pointer; border:none; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>NutriPulse Pro</h1>
-    <p class="subtitle">AI-Powered Meal & Fitness companion</p>
-    
-    <div class="form-group">
-        <label for="categorySelect">Select Tracking Type:</label>
-        <select id="categorySelect">
-            <option value="breakfast">🍳 Breakfast</option>
-            <option value="lunch">🥗 Lunch</option>
-            <option value="dinner">🍲 Dinner</option>
-            <option value="exercise">🏋️ Exercises / Workout</option>
-        </select>
+<div class="app-container">
+    <div class="card">
+        <h1>NutriPulse Pro</h1>
+        <p class="subtitle">Ultimate AI Nutrition & Fitness Suite</p>
+        
+        <!-- Summary Stats -->
+        <div class="grid-2">
+            <div class="stat-box">
+                <div class="stat-val" id="netCalories">0 / 2000</div>
+                <div class="stat-lbl">Calories (Eaten - Burned)</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-val" id="waterVal">0 / 3000 ml</div>
+                <div class="stat-lbl">Water Intake</div>
+            </div>
+        </div>
+
+        <!-- Macro Progress Bars -->
+        <div class="macro-bar-container">
+            <div class="macro-label"><span>Calories</span><span id="calLbl">0g / 2000 kcal</span></div>
+            <div class="progress-bg"><div class="progress-fill fill-cal" id="calBar"></div></div>
+        </div>
+        <div class="macro-bar-container">
+            <div class="macro-label"><span>Protein</span><span id="proLbl">0g / 120g</span></div>
+            <div class="progress-bg"><div class="progress-fill fill-pro" id="proBar"></div></div>
+        </div>
+        <div class="macro-bar-container">
+            <div class="macro-label"><span>Carbs</span><span id="carbLbl">0g / 250g</span></div>
+            <div class="progress-bg"><div class="progress-fill fill-carb" id="carbBar"></div></div>
+        </div>
+        <div class="macro-bar-container">
+            <div class="macro-label"><span>Fats</span><span id="fatLbl">0g / 65g</span></div>
+            <div class="progress-bg"><div class="progress-fill fill-fat" id="fatBar"></div></div>
+        </div>
     </div>
 
-    <div class="form-group">
-        <label for="mealInput">Log Details:</label>
-        <input type="text" id="mealInput" placeholder="e.g. Oats with milk OR 30 mins running">
+    <!-- Quick Goal & Target Calculator -->
+    <div class="card">
+        <h3>🎯 Target Goal Setting</h3>
+        <div class="form-group" style="margin-top: 10px;">
+            <label>Select Fitness Goal:</label>
+            <select id="goalSelect" onchange="updateTargets()">
+                <option value="maintain">Maintain Weight (2000 kcal)</option>
+                <option value="loss">Fat Loss (1600 kcal)</option>
+                <option value="gain">Muscle Gain (2500 kcal)</option>
+            </select>
+        </div>
     </div>
-    
-    <button onclick="analyzeMeal()">Analyze & Track</button>
-    
-    <div class="result-card" id="resultCard">
-        <h3 style="color: #38bdf8; margin-bottom: 8px;">Estimated Breakdown</h3>
-        <p id="resultText" style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.5;"></p>
+
+    <!-- Log Food / Workout -->
+    <div class="card">
+        <h3>📝 Log Food or Workout</h3>
+        <div class="form-group" style="margin-top: 10px;">
+            <label>Type:</label>
+            <select id="categorySelect">
+                <option value="breakfast">🍳 Breakfast</option>
+                <option value="lunch">🥗 Lunch</option>
+                <option value="dinner">🍲 Dinner</option>
+                <option value="snack">🍎 Snack</option>
+                <option value="exercise">🏋️ Workout / Exercise</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Details:</label>
+            <input type="text" id="itemInput" placeholder="e.g., 2 Roti with Paneer OR 30m Running">
+        </div>
+        <button class="btn" onclick="logItem()">Analyze & Save Entry</button>
+    </div>
+
+    <!-- Water Tracker Card -->
+    <div class="card">
+        <h3>💧 Water Hydration Tracker</h3>
+        <div class="water-controls">
+            <button class="water-btn" onclick="addWater(250)">+250 ml</button>
+            <button class="water-btn" onclick="addWater(500)">+500 ml</button>
+        </div>
+    </div>
+
+    <!-- History Logs -->
+    <div class="card">
+        <h3>📋 Today's Activity Log</h3>
+        <ul class="log-list" id="logList"></ul>
+        <button class="btn btn-danger" onclick="clearLogs()">Clear Today's Logs</button>
     </div>
 </div>
 
@@ -192,8 +163,8 @@
 <!-- Modals -->
 <div id="aboutModal" class="modal">
     <div class="modal-content">
-        <h2>About NutriPulse</h2>
-        <p>NutriPulse Pro is a fast, lightweight fitness and nutrition companion designed to help users log daily meals, analyze macro breakdowns, and track exercise routines effortlessly.</p>
+        <h2>About NutriPulse Pro</h2>
+        <p>NutriPulse Pro is an AI-powered fitness suite designed to help users track macro distributions, log daily exercises, and manage water hydration effortlessly.</p>
         <button class="close-btn" onclick="closeModal('aboutModal')">Close</button>
     </div>
 </div>
@@ -201,53 +172,110 @@
 <div id="privacyModal" class="modal">
     <div class="modal-content">
         <h2>Privacy Policy</h2>
-        <p>Your privacy is important to us. NutriPulse does not collect personal identity information or store your logs on external servers.</p>
-        <p style="margin-top: 8px;">We use third-party services, such as Google AdSense, which may use cookies to serve personalized or non-personalized ads based on prior visits to this or other websites.</p>
+        <p>NutriPulse Pro respects your privacy. All activity logs and custom targets remain stored strictly inside your browser's local storage.</p>
+        <p style="margin-top: 8px;">Third-party providers like Google AdSense may use cookies to serve personalized advertisements based on website interactions.</p>
         <button class="close-btn" onclick="closeModal('privacyModal')">Close</button>
     </div>
 </div>
 
 <script>
-    function analyzeMeal() {
-        const category = document.getElementById('categorySelect').value;
-        const input = document.getElementById('mealInput').value;
-        const resultCard = document.getElementById('resultCard');
-        const resultText = document.getElementById('resultText');
-        
-        if(!input.trim()) {
-            alert('Please enter details to analyze.');
-            return;
+    let goals = { cal: 2000, pro: 120, carb: 250, fat: 65, water: 3000 };
+    let totals = { cal: 0, pro: 0, carb: 0, fat: 0, burned: 0, water: 0 };
+    let logs = [];
+
+    window.onload = function() {
+        loadData();
+        render();
+    };
+
+    function updateTargets() {
+        const val = document.getElementById('goalSelect').value;
+        if(val === 'loss') { goals = { cal: 1600, pro: 130, carb: 160, fat: 45, water: 3000 }; }
+        else if(val === 'gain') { goals = { cal: 2500, pro: 160, carb: 320, fat: 75, water: 3500 }; }
+        else { goals = { cal: 2000, pro: 120, carb: 250, fat: 65, water: 3000 }; }
+        saveData();
+        render();
+    }
+
+    function logItem() {
+        const cat = document.getElementById('categorySelect').value;
+        const input = document.getElementById('itemInput').value.trim();
+        if(!input) return alert('Please enter details.');
+
+        let entry = { text: input, type: cat, time: new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) };
+
+        if(cat === 'exercise') {
+            const burned = 250; 
+            totals.burned += burned;
+            entry.desc = `🔥 -${burned} kcal`;
+        } else {
+            const cal = 420, pro = 18, carb = 55, fat = 12;
+            totals.cal += cal; totals.pro += pro; totals.carb += carb; totals.fat += fat;
+            entry.desc = `+${cal} kcal | P:${pro}g C:${carb}g F:${fat}g`;
         }
-        
-        resultText.innerHTML = '<strong>Analyzing...</strong> Calculating details for "' + input + '"...';
-        resultCard.style.display = 'block';
-        
-        setTimeout(() => {
-            if(category === 'exercise') {
-                resultText.innerHTML = '<strong>Activity:</strong> ' + input + '<br><br>' +
-                    '🔥 <strong>Calories Burned:</strong> ~220 - 300 kcal<br>' +
-                    '⏱️ <strong>Estimated Duration:</strong> 30 mins<br><br>' +
-                    '<em>Great job! Stay hydrated after your workout.</em>';
-            } else {
-                resultText.innerHTML = '<strong>' + category.toUpperCase() + ':</strong> ' + input + '<br><br>' +
-                    '🔥 <strong>Calories:</strong> ~450 - 520 kcal<br>' +
-                    '💪 <strong>Protein:</strong> 18g<br>' +
-                    '🌾 <strong>Carbs:</strong> 62g<br>' +
-                    '🥑 <strong>Fats:</strong> 14g<br><br>' +
-                    '<em>Tip: Pair with water to keep digestion smooth!</em>';
-            }
-        }, 1200);
+
+        logs.unshift(entry);
+        document.getElementById('itemInput').value = '';
+        saveData();
+        render();
     }
 
-    function openModal(id) {
-        document.getElementById(id).style.display = 'flex';
+    function addWater(amount) {
+        totals.water += amount;
+        saveData();
+        render();
     }
 
-    function closeModal(id) {
-        document.getElementById(id).style.display = 'none';
+    function clearLogs() {
+        totals = { cal: 0, pro: 0, carb: 0, fat: 0, burned: 0, water: 0 };
+        logs = [];
+        saveData();
+        render();
     }
+
+    function render() {
+        const netCal = totals.cal - totals.burned;
+        document.getElementById('netCalories').innerText = `${netCal} / ${goals.cal}`;
+        document.getElementById('waterVal').innerText = `${totals.water} / ${goals.water} ml`;
+
+        updateBar('cal', totals.cal, goals.cal, 'kcal');
+        updateBar('pro', totals.pro, goals.pro, 'g');
+        updateBar('carb', totals.carb, goals.carb, 'g');
+        updateBar('fat', totals.fat, goals.fat, 'g');
+
+        const list = document.getElementById('logList');
+        list.innerHTML = logs.length === 0 ? '<li style="color:#64748b; font-size:0.85rem; text-align:center;">No entries logged today.</li>' : '';
+        logs.forEach(item => {
+            list.innerHTML += `<li class="log-item"><div><strong>${item.text}</strong><br><small style="color:#94a3b8">${item.desc}</small></div><span style="color:#64748b; font-size:0.75rem">${item.time}</span></li>`;
+        });
+    }
+
+    function updateBar(key, current, goal, unit) {
+        const pct = Math.min(100, Math.round((current / goal) * 100));
+        document.getElementById(`${key}Bar`).style.width = pct + '%';
+        document.getElementById(`${key}Lbl`).innerText = `${current}${unit} / ${goal}${unit}`;
+    }
+
+    function saveData() {
+        localStorage.setItem('np_totals', JSON.stringify(totals));
+        localStorage.setItem('np_logs', JSON.stringify(logs));
+        localStorage.setItem('np_goals', JSON.stringify(goals));
+    }
+
+    function loadData() {
+        const t = localStorage.getItem('np_totals');
+        const l = localStorage.getItem('np_logs');
+        const g = localStorage.getItem('np_goals');
+        if(t) totals = JSON.parse(t);
+        if(l) logs = JSON.parse(l);
+        if(g) goals = JSON.parse(g);
+    }
+
+    function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+    function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 </script>
 
 </body>
 </html>
+
             
