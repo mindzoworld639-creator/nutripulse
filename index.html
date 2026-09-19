@@ -21,6 +21,7 @@
       --text-muted: #94a3b8;
       --border-color: #334155;
       --success-color: #10b981;
+      --danger-color: #ef4444;
     }
 
     * {
@@ -68,8 +69,8 @@
       margin-bottom: 12px;
       color: #f1f5f9;
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 6px;
     }
 
     .stat-row {
@@ -88,6 +89,11 @@
       font-size: 0.85rem;
       color: var(--text-muted);
       margin-bottom: 4px;
+    }
+
+    .input-row {
+      display: flex;
+      gap: 8px;
     }
 
     input, select {
@@ -203,6 +209,32 @@
       font-size: 0.88rem;
       line-height: 1.5;
     }
+
+    .log-list {
+      margin-top: 12px;
+      list-style: none;
+    }
+
+    .log-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #0f172a;
+      padding: 8px 12px;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      font-size: 0.88rem;
+    }
+
+    .delete-btn {
+      color: var(--danger-color);
+      background: none;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 1.1rem;
+      margin-left: 8px;
+    }
   </style>
 </head>
 <body>
@@ -214,7 +246,10 @@
 
   <!-- 1. Daily Progress Summary -->
   <div class="card">
-    <h3>📊 Daily Summary</h3>
+    <h3>
+      <span>📊 Daily Summary</span>
+      <button onclick="clearDayLog()" class="btn-secondary" style="font-size:0.75rem; padding:4px 8px; background-color:#ef4444;">Clear Day</button>
+    </h3>
     <div class="stat-row">
       <span>Calories:</span>
       <strong id="calorieDisplay">0 / 1600 kcal</strong>
@@ -234,7 +269,21 @@
     <button onclick="copyDailySummary()" class="btn-primary" style="margin-top: 12px; background-color: #10b981;">📋 Copy Daily Report</button>
   </div>
 
-  <!-- 2. Auto TDEE Goal Calculator -->
+  <!-- 2. Water Hydration Tracker -->
+  <div class="card">
+    <h3>💧 Water Hydration Tracker</h3>
+    <div class="stat-row" style="margin-bottom: 12px;">
+      <span>Daily Intake:</span>
+      <strong id="waterDisplay">0 / 2500 ml</strong>
+    </div>
+    <div class="timer-btn-row">
+      <button onclick="addWater(250)" class="btn-primary" style="margin-top:0;">+250 ml</button>
+      <button onclick="addWater(500)" class="btn-primary" style="margin-top:0; background-color:#0369a1;">+500 ml</button>
+      <button onclick="resetWater()" class="btn-secondary">Reset</button>
+    </div>
+  </div>
+
+  <!-- 3. Auto TDEE Goal Calculator -->
   <div class="card">
     <h3>🎯 Personalized Goal Calculator</h3>
     <div class="input-group">
@@ -246,15 +295,15 @@
     </div>
     <div class="input-group">
       <label>Age:</label>
-      <input type="number" id="userAge" placeholder="e.g. 25">
+      <input type="number" id="userAge" min="1" placeholder="e.g. 25">
     </div>
     <div class="input-group">
       <label>Height (cm):</label>
-      <input type="number" id="userHeight" placeholder="e.g. 175">
+      <input type="number" id="userHeight" min="1" placeholder="e.g. 175">
     </div>
     <div class="input-group">
       <label>Weight (kg):</label>
-      <input type="number" id="userWeight" placeholder="e.g. 70">
+      <input type="number" id="userWeight" min="1" placeholder="e.g. 70">
     </div>
     <div class="input-group">
       <label>Goal:</label>
@@ -267,7 +316,7 @@
     <button onclick="calculateTargets()" class="btn-primary">Calculate & Save Targets</button>
   </div>
 
-  <!-- 3. Intermittent Fasting Timer -->
+  <!-- 4. Intermittent Fasting Timer -->
   <div class="card">
     <h3>⏱️ Intermittent Fasting Timer (16:8)</h3>
     <div class="fasting-timer-display" id="fastingTimerDisplay">16:00:00</div>
@@ -278,31 +327,50 @@
     </div>
   </div>
 
-  <!-- 4. Quick Food & Activity Logger -->
+  <!-- 5. Quick Food & Activity Logger -->
   <div class="card">
     <h3>📝 Log Meal or Activity</h3>
     <div class="input-group">
       <label>Global Quick Meal Presets:</label>
       <div class="preset-buttons">
-        <span class="preset-chip" onclick="quickLog('Grilled Chicken Salad', 350, 40, 12, 10)">Chicken Salad (350 kcal)</span>
-        <span class="preset-chip" onclick="quickLog('Oatmeal with Peanut Butter', 380, 14, 52, 14)">PB Oatmeal (380 kcal)</span>
-        <span class="preset-chip" onclick="quickLog('2 Eggs & Whole Wheat Toast', 280, 18, 22, 12)">Eggs & Toast (280 kcal)</span>
-        <span class="preset-chip" onclick="quickLog('Greek Yogurt & Berries', 220, 20, 25, 2)">Greek Yogurt (220 kcal)</span>
-        <span class="preset-chip" onclick="quickLog('Protein Whey Shake', 150, 25, 3, 2)">Protein Shake (150 kcal)</span>
+        <span class="preset-chip" onclick="quickLog('Chicken Salad', 350, 40, 12, 10)">Chicken Salad</span>
+        <span class="preset-chip" onclick="quickLog('PB Oatmeal', 380, 14, 52, 14)">PB Oatmeal</span>
+        <span class="preset-chip" onclick="quickLog('Eggs & Toast', 280, 18, 22, 12)">Eggs & Toast</span>
+        <span class="preset-chip" onclick="quickLog('Greek Yogurt', 220, 20, 25, 2)">Greek Yogurt</span>
+        <span class="preset-chip" onclick="quickLog('Protein Shake', 150, 25, 3, 2)">Protein Shake</span>
       </div>
     </div>
     <div class="input-group">
-      <label>Custom Meal or Activity Name:</label>
+      <label>Custom Meal Name:</label>
       <input type="text" id="customLogInput" placeholder="e.g. Avocado Toast with Eggs">
     </div>
-    <div class="input-group">
-      <label>Estimated Calories (kcal):</label>
-      <input type="number" id="customCalInput" placeholder="e.g. 400">
+    <div class="input-row">
+      <div class="input-group" style="flex:1;">
+        <label>Calories (kcal):</label>
+        <input type="number" id="customCalInput" min="1" placeholder="350">
+      </div>
+      <div class="input-group" style="flex:1;">
+        <label>Protein (g):</label>
+        <input type="number" id="customProteinInput" min="0" placeholder="20">
+      </div>
+    </div>
+    <div class="input-row">
+      <div class="input-group" style="flex:1;">
+        <label>Carbs (g):</label>
+        <input type="number" id="customCarbInput" min="0" placeholder="30">
+      </div>
+      <div class="input-group" style="flex:1;">
+        <label>Fats (g):</label>
+        <input type="number" id="customFatInput" min="0" placeholder="10">
+      </div>
     </div>
     <button onclick="logCustomEntry()" class="btn-primary">Add Entry</button>
+
+    <!-- Itemized Entry List -->
+    <ul class="log-list" id="logList"></ul>
   </div>
 
-  <!-- 5. Daily Health Habit Checklist -->
+  <!-- 6. Daily Health Habit Checklist -->
   <div class="card">
     <h3>✅ Daily Health Habits</h3>
     <ul class="habit-list">
@@ -313,7 +381,7 @@
     </ul>
   </div>
 
-  <!-- 6. Global High-Protein Recipe Hub -->
+  <!-- 7. Global High-Protein Recipe Hub -->
   <div class="card">
     <h3>🥗 Curated Recipe Hub</h3>
     <div class="input-group">
@@ -330,7 +398,7 @@
     </div>
   </div>
 
-  <!-- 7. Targeted Exercise Guide -->
+  <!-- 8. Targeted Exercise Guide -->
   <div class="card">
     <h3>🏋️ Targeted Exercise & Workout Guide</h3>
     <div class="input-group">
@@ -351,8 +419,30 @@
     // State management
     let state = {
       targets: { calories: 1600, protein: 130, carbs: 160, fats: 45 },
-      logged: { calories: 0, protein: 0, carbs: 0, fats: 0 }
+      logged: { calories: 0, protein: 0, carbs: 0, fats: 0, water: 0 },
+      entries: [],
+      lastDate: new Date().toISOString().split('T')[0]
     };
+
+    // Auto Midnight Reset Check
+    function checkMidnightReset() {
+      const today = new Date().toISOString().split('T')[0];
+      if (state.lastDate !== today) {
+        state.logged = { calories: 0, protein: 0, carbs: 0, fats: 0, water: 0 };
+        state.entries = [];
+        state.lastDate = today;
+        saveState();
+        resetHabitsCheckboxes();
+      }
+    }
+
+    function resetHabitsCheckboxes() {
+      ['habit1', 'habit2', 'habit3', 'habit4'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.checked = false;
+      });
+      localStorage.removeItem('nutripulse_habits');
+    }
 
     // Auto TDEE Calculation Logic
     function calculateTargets() {
@@ -362,16 +452,15 @@
       const weight = parseFloat(document.getElementById('userWeight').value);
       const goal = document.getElementById('userGoal').value;
 
-      if (!age || !height || !weight) {
-        alert("Please enter age, height, and weight!");
+      if (!age || age <= 0 || !height || height <= 0 || !weight || weight <= 0) {
+        alert("Please enter valid positive numbers for age, height, and weight!");
         return;
       }
 
-      // Mifflin-St Jeor Equation
       let bmr = (10 * weight) + (6.25 * height) - (5 * age);
       bmr = (gender === 'male') ? bmr + 5 : bmr - 161;
 
-      let tdee = bmr * 1.375; // Light activity factor
+      let tdee = bmr * 1.375;
 
       let targetCalories = tdee;
       if (goal === 'fat_loss') targetCalories = tdee - 500;
@@ -384,10 +473,9 @@
       let targetCarbs = Math.round((targetCalories - (targetProtein * 4) - (targetFat * 9)) / 4);
 
       state.targets = { calories: targetCalories, protein: targetProtein, carbs: targetCarbs, fats: targetFat };
-      localStorage.setItem('nutripulse_targets', JSON.stringify(state.targets));
-
+      saveState();
       updateUI();
-      alert(`Custom Targets Saved! Daily Goal: ${targetCalories} kcal`);
+      alert(`Targets Saved! Daily Goal: ${targetCalories} kcal`);
     }
 
     function updateUI() {
@@ -395,59 +483,157 @@
       document.getElementById('proteinDisplay').innerText = `${state.logged.protein} / ${state.targets.protein} g`;
       document.getElementById('carbDisplay').innerText = `${state.logged.carbs} / ${state.targets.carbs} g`;
       document.getElementById('fatDisplay').innerText = `${state.logged.fats} / ${state.targets.fats} g`;
+      document.getElementById('waterDisplay').innerText = `${state.logged.water} / 2500 ml`;
+      renderEntries();
     }
 
-    // Quick Food Logging
-    function quickLog(name, cal, p, c, f) {
-      state.logged.calories += cal;
-      state.logged.protein += p;
-      state.logged.carbs += c;
-      state.logged.fats += f;
-      saveLog();
+    // Water Tracking Functions
+    function addWater(amount) {
+      state.logged.water += amount;
+      if (state.logged.water >= 2500) {
+        const h2 = document.getElementById('habit2');
+        if (h2) {
+          h2.checked = true;
+          saveHabits();
+        }
+      }
+      saveState();
       updateUI();
-      alert(`Logged: ${name} (+${cal} kcal)`);
+    }
+
+    function resetWater() {
+      state.logged.water = 0;
+      const h2 = document.getElementById('habit2');
+      if (h2) {
+        h2.checked = false;
+        saveHabits();
+      }
+      saveState();
+      updateUI();
+    }
+
+    // Food Logging Functions
+    function quickLog(name, cal, p, c, f) {
+      const entry = { id: Date.now(), name, cal, p, c, f };
+      addEntry(entry);
     }
 
     function logCustomEntry() {
       const name = document.getElementById('customLogInput').value;
-      const cal = parseInt(document.getElementById('customCalInput').value);
+      const cal = parseInt(document.getElementById('customCalInput').value) || 0;
+      const p = parseInt(document.getElementById('customProteinInput').value) || 0;
+      const c = parseInt(document.getElementById('customCarbInput').value) || 0;
+      const f = parseInt(document.getElementById('customFatInput').value) || 0;
 
-      if (!name || !cal) {
-        alert("Please enter both meal name and estimated calories.");
+      if (!name || cal <= 0) {
+        alert("Please enter a meal name and a positive calorie amount.");
         return;
       }
 
-      state.logged.calories += cal;
-      saveLog();
-      updateUI();
+      const entry = { id: Date.now(), name, cal, p, c, f };
+      addEntry(entry);
+
       document.getElementById('customLogInput').value = '';
       document.getElementById('customCalInput').value = '';
-      alert(`Logged: ${name} (+${cal} kcal)`);
+      document.getElementById('customProteinInput').value = '';
+      document.getElementById('customCarbInput').value = '';
+      document.getElementById('customFatInput').value = '';
     }
 
-    function saveLog() {
-      localStorage.setItem('nutripulse_logged', JSON.stringify(state.logged));
+    function addEntry(entry) {
+      state.entries.push(entry);
+      recalculateLoggedTotals();
+      saveState();
+      updateUI();
     }
 
-    // Intermittent Fasting Timer Logic
+    function deleteEntry(id) {
+      state.entries = state.entries.filter(e => e.id !== id);
+      recalculateLoggedTotals();
+      saveState();
+      updateUI();
+    }
+
+    function clearDayLog() {
+      if (confirm("Reset all logged meals and calories for today?")) {
+        state.logged.calories = 0;
+        state.logged.protein = 0;
+        state.logged.carbs = 0;
+        state.logged.fats = 0;
+        state.entries = [];
+        saveState();
+        updateUI();
+      }
+    }
+
+    function recalculateLoggedTotals() {
+      let cal = 0, p = 0, c = 0, f = 0;
+      state.entries.forEach(e => {
+        cal += e.cal;
+        p += e.p;
+        c += e.c;
+        f += e.f;
+      });
+      state.logged.calories = cal;
+      state.logged.protein = p;
+      state.logged.carbs = c;
+      state.logged.fats = f;
+    }
+
+    function renderEntries() {
+      const list = document.getElementById('logList');
+      list.innerHTML = '';
+      state.entries.forEach(e => {
+        const li = document.createElement('li');
+        li.className = 'log-item';
+        li.innerHTML = `
+          <span><strong>${e.name}</strong> - ${e.cal} kcal (${e.p}g P | ${e.c}g C | ${e.f}g F)</span>
+          <button class="delete-btn" onclick="deleteEntry(${e.id})">&times;</button>
+        `;
+        list.appendChild(li);
+      });
+    }
+
+    function saveState() {
+      localStorage.setItem('nutripulse_state', JSON.stringify(state));
+    }
+
+    // Persistent Fasting Timer Logic
     let timerInterval = null;
-    let secondsLeft = 16 * 3600;
 
     function startFastingTimer() {
-      if (timerInterval) return;
+      let startTime = localStorage.getItem('fasting_start_time');
+      if (!startTime) {
+        startTime = Date.now();
+        localStorage.setItem('fasting_start_time', startTime);
+      }
+      runFastingTimer();
+    }
+
+    function runFastingTimer() {
+      if (timerInterval) clearInterval(timerInterval);
+      
       document.getElementById('fastingStatus').innerText = "Status: Fasting in Progress 🔥";
       document.getElementById('fastingStatus').style.color = "#10b981";
 
       timerInterval = setInterval(() => {
-        if (secondsLeft <= 0) {
+        const startTime = parseInt(localStorage.getItem('fasting_start_time'));
+        if (!startTime) return resetFastingTimer();
+
+        const elapsedSeconds = Math.floor((Date.now() - startTime) / 1000);
+        const totalFastingSeconds = 16 * 3600;
+        const remainingSeconds = totalFastingSeconds - elapsedSeconds;
+
+        if (remainingSeconds <= 0) {
           clearInterval(timerInterval);
+          document.getElementById('fastingTimerDisplay').innerText = "00:00:00";
           document.getElementById('fastingStatus').innerText = "Status: Fast Complete! 🎉";
           return;
         }
-        secondsLeft--;
-        const hrs = Math.floor(secondsLeft / 3600).toString().padStart(2, '0');
-        const mins = Math.floor((secondsLeft % 3600) / 60).toString().padStart(2, '0');
-        const secs = (secondsLeft % 60).toString().padStart(2, '0');
+
+        const hrs = Math.floor(remainingSeconds / 3600).toString().padStart(2, '0');
+        const mins = Math.floor((remainingSeconds % 3600) / 60).toString().padStart(2, '0');
+        const secs = (remainingSeconds % 60).toString().padStart(2, '0');
         document.getElementById('fastingTimerDisplay').innerText = `${hrs}:${mins}:${secs}`;
       }, 1000);
     }
@@ -455,7 +641,7 @@
     function resetFastingTimer() {
       clearInterval(timerInterval);
       timerInterval = null;
-      secondsLeft = 16 * 3600;
+      localStorage.removeItem('fasting_start_time');
       document.getElementById('fastingTimerDisplay').innerText = "16:00:00";
       document.getElementById('fastingStatus').innerText = "Status: Not Started";
       document.getElementById('fastingStatus').style.color = "var(--text-muted)";
@@ -472,7 +658,7 @@
       localStorage.setItem('nutripulse_habits', JSON.stringify(habits));
     }
 
-    // Interactive Global Recipe Filter
+    // Interactive Recipe & Workout Filters
     function filterRecipes() {
       const goal = document.getElementById('recipeFilter').value;
       const display = document.getElementById('recipeDisplay');
@@ -500,7 +686,6 @@
       }
     }
 
-    // Interactive Workout Filter
     function filterWorkouts() {
       const area = document.getElementById('exerciseFilter').value;
       const display = document.getElementById('exerciseDisplay');
@@ -523,20 +708,20 @@
       }
     }
 
-    // Copy Daily Report to Clipboard
     function copyDailySummary() {
-      const text = `📊 NutriPulse Pro Daily Report:\n• Calories: ${state.logged.calories} / ${state.targets.calories} kcal\n• Protein: ${state.logged.protein}g / ${state.targets.protein}g\nTracked privately with NutriPulse Pro!`;
+      const text = `📊 NutriPulse Pro Daily Report:\n• Calories: ${state.logged.calories} / ${state.targets.calories} kcal\n• Protein: ${state.logged.protein}g / ${state.targets.protein}g\n• Water: ${state.logged.water} / 2500 ml\nTracked privately with NutriPulse Pro!`;
       navigator.clipboard.writeText(text);
       alert("Daily summary copied to clipboard!");
     }
 
-    // Initialization on Startup
+    // Startup Initialization
     window.addEventListener('load', () => {
-      const savedTargets = localStorage.getItem('nutripulse_targets');
-      if (savedTargets) state.targets = JSON.parse(savedTargets);
+      const savedState = localStorage.getItem('nutripulse_state');
+      if (savedState) {
+        state = JSON.parse(savedState);
+      }
 
-      const savedLogged = localStorage.getItem('nutripulse_logged');
-      if (savedLogged) state.logged = JSON.parse(savedLogged);
+      checkMidnightReset();
 
       const savedHabits = localStorage.getItem('nutripulse_habits');
       if (savedHabits) {
@@ -545,6 +730,10 @@
         document.getElementById('habit2').checked = habits.h2 || false;
         document.getElementById('habit3').checked = habits.h3 || false;
         document.getElementById('habit4').checked = habits.h4 || false;
+      }
+
+      if (localStorage.getItem('fasting_start_time')) {
+        runFastingTimer();
       }
 
       updateUI();
